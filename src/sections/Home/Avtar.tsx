@@ -6,15 +6,15 @@ const BASE = "http://warriorcomics.com/Content/Images";
 
 type Card = { name: string; text: string; href: string };
 type Slide = {
-  left: string[]; // images on the left of the band
-  right: string[]; // images on the right of the band
+  left: string[]; // 1 image on the left
+  right: string[]; // 1 image on the right
   cards: [Card, Card];
 };
 
-/* Swap images between slides here if a character ends up on the wrong side */
+/* Strictly 1 image on the left and 1 image on the right per slide */
 const SLIDES: Slide[] = [
   {
-    left: [`${BASE}/doctor-1.png`, `${BASE}/ange-guru-1.png`],
+    left: [`${BASE}/doctor-1.png`],
     right: [`${BASE}/sentor-1.png`],
     cards: [
       {
@@ -31,7 +31,7 @@ const SLIDES: Slide[] = [
   },
   {
     left: [`${BASE}/petraB.png`],
-    right: [`${BASE}/doctor-1.png`],
+    right: [`${BASE}/ange-guru-1.png`],
     cards: [
       {
         name: "Ange Apollo",
@@ -47,7 +47,7 @@ const SLIDES: Slide[] = [
   },
   {
     left: [`${BASE}/Merlyn-1.png`],
-    right: [`${BASE}/petraB.png`, `${BASE}/ange-guru-1.png`],
+    right: [`${BASE}/petraB.png`],
     cards: [
       {
         name: "Merlyn Meronius",
@@ -86,7 +86,7 @@ export default function Avtar() {
     };
   }, [paused]);
 
-  /* ---------- Keyboard nav (optional, nice touch) ---------- */
+  /* ---------- Keyboard nav ---------- */
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "ArrowRight") setIndex((i) => (i + 1) % SLIDES.length);
@@ -100,18 +100,18 @@ export default function Avtar() {
   return (
     <section
       id="avatars"
-      className="relative z-20 -mt-20 md:-mt-28 bg-transparent font-sans overflow-x-clip"
+      className="relative z-20 -mt-12 sm:-mt-20 md:-mt-28 bg-transparent font-sans overflow-x-clip select-none"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onTouchStart={() => setPaused(true)}
       onTouchEnd={() => setPaused(false)}
     >
-      {/* Stage: characters rise above the band (overlapping the blog) and drop below it */}
-      <div className="relative w-full h-[350px] md:h-[470px]">
+      {/* Stage */}
+      <div className="relative w-full h-[320px] sm:h-[380px] md:h-[470px]">
         {/* Blue band */}
         <div
           aria-hidden
-          className="absolute inset-x-0 top-[80px] md:top-[110px] h-[210px] md:h-[265px]"
+          className="absolute inset-x-0 top-[60px] sm:top-[80px] md:top-[110px] h-[220px] sm:h-[240px] md:h-[265px]"
           style={{ background: "#17789e" }}
         />
 
@@ -130,8 +130,8 @@ export default function Avtar() {
                 zIndex: on ? 2 : 1,
               }}
             >
-              {/* Left characters */}
-              <div className="absolute left-0 top-[14px] md:top-[30px] flex items-end pointer-events-none pl-0 md:pl-[2%]">
+              {/* Single Left Character */}
+              <div className="absolute left-0 top-[10px] sm:top-[14px] md:top-[30px] flex items-end pointer-events-none pl-0 md:pl-[2%] max-w-[32%] sm:max-w-none">
                 {s.left.map((src, k) => (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
@@ -139,9 +139,7 @@ export default function Avtar() {
                     src={src}
                     alt=""
                     draggable={false}
-                    className={`block w-auto max-w-none select-none h-[260px] md:h-[400px] ${
-                      k > 0 ? "-ml-10 md:-ml-16 hidden sm:block" : ""
-                    }`}
+                    className="block w-auto max-w-full sm:max-w-none select-none object-contain h-[200px] xs:h-[240px] sm:h-[310px] md:h-[400px]"
                     style={{
                       transform: on ? "translateX(0)" : "translateX(-40px)",
                       transition: "transform 0.9s cubic-bezier(0.22,1,0.36,1)",
@@ -151,8 +149,8 @@ export default function Avtar() {
                 ))}
               </div>
 
-              {/* Right characters */}
-              <div className="absolute right-0 top-[14px] md:top-[30px] flex items-end flex-row-reverse pointer-events-none pr-0 md:pr-[2%]">
+              {/* Single Right Character */}
+              <div className="absolute right-0 top-[10px] sm:top-[14px] md:top-[30px] flex items-end flex-row-reverse pointer-events-none pr-0 md:pr-[2%] max-w-[32%] sm:max-w-none">
                 {s.right.map((src, k) => (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
@@ -160,9 +158,7 @@ export default function Avtar() {
                     src={src}
                     alt=""
                     draggable={false}
-                    className={`block w-auto max-w-none select-none h-[260px] md:h-[400px] ${
-                      k > 0 ? "-mr-10 md:-mr-16 hidden sm:block" : ""
-                    }`}
+                    className="block w-auto max-w-full sm:max-w-none select-none object-contain h-[200px] xs:h-[240px] sm:h-[310px] md:h-[400px]"
                     style={{
                       transform: on ? "translateX(0)" : "translateX(40px)",
                       transition: "transform 0.9s cubic-bezier(0.22,1,0.36,1)",
@@ -172,13 +168,13 @@ export default function Avtar() {
                 ))}
               </div>
 
-              {/* Centre cards */}
-              <div className="absolute inset-x-0 top-[80px] md:top-[110px] h-[210px] md:h-[265px] flex items-center justify-center px-[22%] sm:px-[20%] md:px-[24%] lg:px-[27%] pointer-events-none">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 lg:gap-x-12 gap-y-3 w-full max-w-[760px] pointer-events-auto text-white -mt-4">
+              {/* Center text cards */}
+              <div className="absolute inset-x-0 top-[60px] sm:top-[80px] md:top-[110px] h-[220px] sm:h-[240px] md:h-[265px] flex items-center justify-center px-4 sm:px-[20%] md:px-[24%] lg:px-[27%] pointer-events-none">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 lg:gap-x-12 gap-y-3 w-full max-w-[760px] pointer-events-auto text-white -mt-2 sm:-mt-4">
                   {s.cards.map((c, ci) => (
                     <div
                       key={ci}
-                      className={`flex items-start gap-3 ${
+                      className={`flex items-start gap-2 sm:gap-3 ${
                         ci === 1 ? "hidden sm:flex" : ""
                       }`}
                       style={{
@@ -191,9 +187,7 @@ export default function Avtar() {
                     >
                       <svg
                         aria-hidden
-                        className="shrink-0 mt-0.5"
-                        width="30"
-                        height="30"
+                        className="shrink-0 mt-0.5 w-5 h-5 sm:w-7 sm:h-7"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -205,15 +199,15 @@ export default function Avtar() {
                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                       </svg>
                       <div className="min-w-0">
-                        <h3 className="m-0 text-base md:text-lg font-bold uppercase tracking-wide leading-tight">
+                        <h3 className="m-0 text-sm sm:text-base md:text-lg font-bold uppercase tracking-wide leading-tight">
                           {c.name}
                         </h3>
-                        <p className="mt-1 mb-2.5 text-[10px] md:text-[11px] leading-snug uppercase text-white/90">
+                        <p className="mt-1 mb-2 sm:mb-2.5 text-[9px] sm:text-[10px] md:text-[11px] leading-snug uppercase text-white/90 line-clamp-3 sm:line-clamp-none">
                           {c.text}
                         </p>
                         <a
                           href={c.href}
-                          className="inline-block px-3.5 py-1.5 text-xs md:text-[13px] font-bold text-white no-underline transition-colors duration-200"
+                          className="inline-block px-2.5 sm:px-3.5 py-1 sm:py-1.5 text-[10px] sm:text-xs md:text-[13px] font-bold text-white no-underline transition-colors duration-200"
                           style={{ background: "#c8102e" }}
                           onMouseEnter={(e) =>
                             (e.currentTarget.style.background = "#a30d25")
@@ -233,9 +227,9 @@ export default function Avtar() {
           );
         })}
 
-        {/* Pagination dots (inside the band, bottom centre) */}
-        <div className="absolute inset-x-0 top-[80px] md:top-[110px] h-[210px] md:h-[265px] flex items-end justify-center pb-4 md:pb-5 pointer-events-none">
-          <div className="flex items-center gap-2.5 pointer-events-auto">
+        {/* Pagination dots */}
+        <div className="absolute inset-x-0 top-[60px] sm:top-[80px] md:top-[110px] h-[220px] sm:h-[240px] md:h-[265px] flex items-end justify-center pb-3 sm:pb-4 md:pb-5 pointer-events-none">
+          <div className="flex items-center gap-2.5 pointer-events-auto z-10">
             {SLIDES.map((_, i) => (
               <button
                 key={i}
@@ -246,7 +240,8 @@ export default function Avtar() {
                 style={{
                   width: i === index ? 26 : 10,
                   height: 10,
-                  background: i === index ? "#ffffff" : "rgba(255,255,255,0.4)",
+                  background:
+                    i === index ? "#ffffff" : "rgba(255,255,255,0.4)",
                 }}
               />
             ))}

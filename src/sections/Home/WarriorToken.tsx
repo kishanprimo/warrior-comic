@@ -489,7 +489,7 @@ export default function WarriorToken() {
   return (
     <section
       ref={sectionRef}
-      id="presale"
+      id="warrior-token"
       aria-label="Warrior Token presale"
       className="relative isolate min-h-screen overflow-hidden bg-[color-mix(in_oklab,var(--nav-overlay-bg)_30%,#000)] text-nav-right-heading transition-colors duration-500"
     >

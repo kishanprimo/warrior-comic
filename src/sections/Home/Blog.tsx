@@ -415,18 +415,6 @@ export default function Blog() {
           </div>
         </div>
 
-       
-
-        <div className="absolute bottom-5 md:bottom-7 flex items-center gap-1.5 p-1.5 bg-foreground/10 backdrop-blur-md rounded-full border border-foreground/20 z-10 shadow-sm">
-          <span className="px-3.5 py-2 text-xs font-bold text-foreground">WC.</span>
-          <button
-            type="button"
-            onClick={() => step(1, true)}
-            className="bg-accent text-accent-fg border-none px-5 py-2 rounded-full text-xs font-semibold cursor-pointer transition-transform duration-200 hover:brightness-110 hover:scale-105"
-          >
-            Next story
-          </button>
-        </div>
 
         {/* Cursor */}
         <div
