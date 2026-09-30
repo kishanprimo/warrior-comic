@@ -1,26 +1,160 @@
 @import "tailwindcss";
+@import "./colors.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* Expose the tokens as Tailwind colors: bg-background, text-foreground,
+   bg-accent, bg-nav-left, bg-loader-a, text-loader-b-fg, etc. */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+
+  --color-header-line: var(--header-line);
+
+  --color-nav-overlay: var(--nav-overlay-bg);
+  --color-nav-left: var(--nav-left-bg);
+  --color-nav-left-fg: var(--nav-left-fg);
+  --color-nav-band: var(--nav-left-band);
+  --color-nav-left-line: var(--nav-left-line);
+
+  --color-nav-right-fg: var(--nav-right-fg);
+  --color-nav-right-heading: var(--nav-right-heading);
+  --color-nav-right-text: var(--nav-right-text);
+  --color-nav-right-line: var(--nav-right-line);
+  --color-nav-right-ring: var(--nav-right-ring);
+
+  --color-loader-a: var(--loader-a-bg);
+  --color-loader-a-fg: var(--loader-a-fg);
+  --color-loader-b: var(--loader-b-bg);
+  --color-loader-b-fg: var(--loader-b-fg);
+  --color-loader-b-muted: var(--loader-b-muted);
+  --color-loader-b-dim: var(--loader-b-dim);
+  --color-loader-b-line: var(--loader-b-line);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--background);
 }
 
 body {
+  margin: 0;
+  min-height: 100vh;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
+
+/* =========================================================
+   NAVBAR ANIMATIONS
+   ========================================================= */
+
+@keyframes wcNavFade {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes wcNavLine {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes wcPing {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  75%,
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+/* Utility animation classes */
+.animate-wc-nav-fade {
+  animation: wcNavFade 0.9s ease-out both;
+}
+
+.animate-wc-nav-line {
+  animation: wcNavLine 1.4s cubic-bezier(0.77, 0, 0.175, 1) both;
+}
+
+.animate-wc-ping {
+  animation: wcPing 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Delay helpers (used by header intro elements) */
+.wc-delay-intro {
+  animation-delay: 5.6s;
+}
+.wc-delay-intro-1 {
+  animation-delay: 5.7s;
+}
+.wc-delay-intro-2 {
+  animation-delay: 5.8s;
+}
+
+/* =========================================================
+   HERO — RADIANT SPACE CIRCLE
+   ========================================================= */
+
+@keyframes wcSpinSlow {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes wcSpinSlowReverse {
+  from { transform: translate(-50%, -50%) rotate(360deg); }
+  to   { transform: translate(-50%, -50%) rotate(0deg); }
+}
+
+@keyframes wcGlowPulse {
+  0%, 100% {
+    opacity: 0.55;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.95;
+    transform: translate(-50%, -50%) scale(1.06);
+  }
+}
+
+@keyframes wcStarDrift {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-12px, -18px, 0); }
+}
+
+.wc-spin-slow {
+  animation: wcSpinSlow 26s linear infinite;
+}
+
+.wc-spin-slow-reverse {
+  animation: wcSpinSlowReverse 40s linear infinite;
+}
+
+.wc-glow-pulse {
+  animation: wcGlowPulse 6s ease-in-out infinite;
+}
+
+.wc-star-drift {
+  animation: wcStarDrift 12s ease-in-out infinite alternate;
+}
+
