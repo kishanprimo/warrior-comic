@@ -6,15 +6,15 @@ const BASE = "http://warriorcomics.com/Content/Images";
 
 type Card = { name: string; text: string; href: string };
 type Slide = {
-  left: string[]; // 1 image on the left
-  right: string[]; // 1 image on the right
+  left: string[]; // images on the left
+  right: string[]; // images on the right
   cards: [Card, Card];
 };
 
-/* Strictly 1 image on the left and 1 image on the right per slide */
+/* Allows 2 images on 2xl screens, conditionally hidden on smaller screens */
 const SLIDES: Slide[] = [
   {
-    left: [`${BASE}/doctor-1.png`],
+    left: [`${BASE}/doctor-1.png`, `${BASE}/ange-guru-1.png`],
     right: [`${BASE}/sentor-1.png`],
     cards: [
       {
@@ -31,7 +31,7 @@ const SLIDES: Slide[] = [
   },
   {
     left: [`${BASE}/petraB.png`],
-    right: [`${BASE}/ange-guru-1.png`],
+    right: [`${BASE}/doctor-1.png`],
     cards: [
       {
         name: "Ange Apollo",
@@ -47,7 +47,7 @@ const SLIDES: Slide[] = [
   },
   {
     left: [`${BASE}/Merlyn-1.png`],
-    right: [`${BASE}/petraB.png`],
+    right: [`${BASE}/petraB.png`, `${BASE}/ange-guru-1.png`],
     cards: [
       {
         name: "Merlyn Meronius",
@@ -130,7 +130,7 @@ export default function Avtar() {
                 zIndex: on ? 2 : 1,
               }}
             >
-              {/* Single Left Character */}
+              {/* Left Characters */}
               <div className="absolute left-0 top-[10px] sm:top-[14px] md:top-[30px] flex items-end pointer-events-none pl-0 md:pl-[2%] max-w-[32%] sm:max-w-none">
                 {s.left.map((src, k) => (
                   // eslint-disable-next-line @next/next/no-img-element
@@ -139,7 +139,9 @@ export default function Avtar() {
                     src={src}
                     alt=""
                     draggable={false}
-                    className="block w-auto max-w-full sm:max-w-none select-none object-contain h-[200px] xs:h-[240px] sm:h-[310px] md:h-[400px]"
+                    className={`block w-auto max-w-full sm:max-w-none select-none object-contain h-[200px] xs:h-[240px] sm:h-[310px] md:h-[400px] ${
+                      k > 0 ? "-ml-8 sm:-ml-12 md:-ml-16 hidden 2xl:block" : ""
+                    }`}
                     style={{
                       transform: on ? "translateX(0)" : "translateX(-40px)",
                       transition: "transform 0.9s cubic-bezier(0.22,1,0.36,1)",
@@ -149,7 +151,7 @@ export default function Avtar() {
                 ))}
               </div>
 
-              {/* Single Right Character */}
+              {/* Right Characters */}
               <div className="absolute right-0 top-[10px] sm:top-[14px] md:top-[30px] flex items-end flex-row-reverse pointer-events-none pr-0 md:pr-[2%] max-w-[32%] sm:max-w-none">
                 {s.right.map((src, k) => (
                   // eslint-disable-next-line @next/next/no-img-element
@@ -158,7 +160,9 @@ export default function Avtar() {
                     src={src}
                     alt=""
                     draggable={false}
-                    className="block w-auto max-w-full sm:max-w-none select-none object-contain h-[200px] xs:h-[240px] sm:h-[310px] md:h-[400px]"
+                    className={`block w-auto max-w-full sm:max-w-none select-none object-contain h-[200px] xs:h-[240px] sm:h-[310px] md:h-[400px] ${
+                      k > 0 ? "-mr-8 sm:-mr-12 md:-mr-16 hidden 2xl:block" : ""
+                    }`}
                     style={{
                       transform: on ? "translateX(0)" : "translateX(40px)",
                       transition: "transform 0.9s cubic-bezier(0.22,1,0.36,1)",
