@@ -2,7 +2,7 @@
    Images are the same character art used in Avtar.tsx (Avatarman uses the
    hero image). Edit text / order / side / tone / fire here — the layout follows. */
 
-const BASE = "http://warriorcomics.com/Content/Images";
+const BASE = "/wc-content/Images";
 
 /* Background artwork, one per chapter (cycles if there are more chapters).
    They are blended with the chapter colour so they follow the theme. */

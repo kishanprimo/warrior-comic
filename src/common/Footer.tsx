@@ -6,7 +6,7 @@ import Link from "next/link";
 /* ------------------------------------------------------------------ */
 /* Content (from warriorcomics.com)                                    */
 /* ------------------------------------------------------------------ */
-const BASE = "http://warriorcomics.com/Content/Images";
+const BASE = "/wc-content/Images";
 const LOGO = `${BASE}/Warrior-Comics-logo-3.png`;
 const TOKEN_LOGO = `${BASE}/warrior-token-logo.png`;
 

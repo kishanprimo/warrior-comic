@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 /* ------------------------------------------------------------------ */
 /* Content (from warriorcomics.com)                                    */
 /* ------------------------------------------------------------------ */
-const BASE = "http://warriorcomics.com/Content/Images";
+const BASE = "/wc-content/Images";
 const BG_IMG = `${BASE}/artist.jpg`;
 const HERO_L = `${BASE}/avtarman.png`;
 const HERO_R = `${BASE}/sentor-1.png`;

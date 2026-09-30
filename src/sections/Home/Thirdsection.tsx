@@ -6,11 +6,11 @@ import Link from "next/link";
 /* ------------------------------------------------------------------ */
 /* Content (from warriorcomics.com)                                    */
 /* ------------------------------------------------------------------ */
-const BASE = "http://warriorcomics.com/Content/Images";
+const BASE = "/wc-content/Images";
 const COMIC_IMG = `${BASE}/comic-book.jpg`;
 const ARTIST_IMG = `${BASE}/artist.jpg`;
 const WC_LOGO = `${BASE}/Warrior-Comics-logo-3.png`;
-const MOTION_VIDEO = "http://warriorcomics.com/Content/videos/warrior-comic-motion-logo.mp4";
+const MOTION_VIDEO = "/wc-content/videos/warrior-comic-motion-logo.mp4";
 
 const INTRO = "We love to share creative and entertaining stories";
 const GAP = 6; // px between tiles once assembled

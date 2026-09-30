@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
-const BASE = "http://warriorcomics.com/Content/Images";
+const BASE = "/wc-content/Images";
 const HEADING = "Let's blog";
 const SUB = "We love to share creative and entertaining stories";
 

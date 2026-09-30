@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 /* ------------------------------------------------------------------ */
 /* Content (taken from warriorcomics.com)                             */
 /* ------------------------------------------------------------------ */
-const BASE = "http://warriorcomics.com/Content/Images";
+const BASE = "/wc-content/Images";
 
 const HEADING = "How We Do This";
 
