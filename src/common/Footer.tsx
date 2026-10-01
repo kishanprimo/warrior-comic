@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 /* ------------------------------------------------------------------ */
-/* Content (from warriorcomics.com)                                    */
+/* Content                                                             */
 /* ------------------------------------------------------------------ */
 const BASE = "/images/Imgs";
 const LOGO = `${BASE}/Logo.png`;
@@ -20,13 +20,12 @@ const MENUS = [
   { label: "Comics", href: "/comics" },
   { label: "Videos", href: "/videos" },
   { label: "Blog", href: "/blog" },
-  { label: "News", href: "/news" },
   { label: "FAQ", href: "/faq" },
 ];
 
 const POLICIES = [
-  { label: "Terms & Conditions", href: "#" },
-  { label: "Privacy Policy", href: "#" },
+  { label: "Terms & Conditions", href: "/terms" },
+  { label: "Privacy Policy", href: "/privacy" },
 ];
 
 const SOCIALS = [
@@ -65,12 +64,8 @@ const SOCIALS = [
 const WORDMARK = "Warrior Comics";
 const EASE = "cubic-bezier(0.77,0,0.175,1)";
 
-/* ------------------------------------------------------------------ */
-/* Helpers                                                             */
-/* ------------------------------------------------------------------ */
 const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
-/* Self-contained keyframes */
 const CSS = `
 @keyframes ftSweep { from { transform: translateX(-120%); } to { transform: translateX(420%); } }
 @keyframes ftSpin { to { transform: rotate(360deg); } }
@@ -98,25 +93,14 @@ const CSS = `
 }
 `;
 
-// rising embers: [left %, duration s, delay s, size px, drift px]
 const EMBERS: [number, number, number, number, number][] = [
-  [8, 9, 0, 2, 20],
-  [21, 11, 3, 3, -16],
-  [37, 10, 6, 2, 22],
-  [52, 12, 1, 3, -24],
-  [66, 9, 5, 2, 18],
-  [80, 11, 2, 3, -20],
-  [93, 10, 7, 2, 14],
+  [8, 9, 0, 2, 20], [21, 11, 3, 3, -16], [37, 10, 6, 2, 22], [52, 12, 1, 3, -24],
+  [66, 9, 5, 2, 18], [80, 11, 2, 3, -20], [93, 10, 7, 2, 14],
 ];
 
-// stars: [left %, top %, delay s, size px]
 const STARS: [number, number, number, number][] = [
-  [6, 18, 0, 2],
-  [24, 62, 1.3, 3],
-  [44, 14, 2.2, 2],
-  [61, 74, 0.7, 2],
-  [77, 24, 1.8, 3],
-  [95, 55, 0.4, 2],
+  [6, 18, 0, 2], [24, 62, 1.3, 3], [44, 14, 2.2, 2], [61, 74, 0.7, 2],
+  [77, 24, 1.8, 3], [95, 55, 0.4, 2],
 ];
 
 /* ------------------------------------------------------------------ */
@@ -147,7 +131,6 @@ const PHONE_ICON = [
 ];
 const PIN = ["M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z", "M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"];
 
-/* heading with a coloured underline that draws in */
 function ColHead({
   title,
   color,
@@ -161,10 +144,10 @@ function ColHead({
 }) {
   return (
     <div className="mb-5">
-      <h4 className="m-0 font-serif text-base font-semibold uppercase tracking-[0.18em] text-nav-right-heading">
+      <h4 className="m-0 font-serif text-base font-semibold uppercase tracking-[0.18em] text-foreground">
         {title}
       </h4>
-      <div className="relative mt-3 h-px w-full bg-nav-right-line">
+      <div className="relative mt-3 h-px w-full bg-foreground/15">
         <span
           aria-hidden
           className={`absolute left-0 top-[-1px] h-[3px] w-12 origin-left ${color}`}
@@ -179,9 +162,8 @@ function ColHead({
   );
 }
 
-/* link with a growing dash + arrow */
 const linkCls =
-  "group inline-flex items-center gap-0 text-[15px] text-nav-right-text no-underline transition-all duration-300 hover:text-nav-right-heading";
+  "group inline-flex items-center gap-0 text-[15px] text-foreground/70 no-underline transition-all duration-300 hover:text-foreground";
 
 function Dash() {
   return (
@@ -201,7 +183,6 @@ export default function Footer() {
 
   const [inView, setInView] = useState(false);
 
-  /* reveal when the footer scrolls into view */
   useEffect(() => {
     const el = footRef.current;
     if (!el) return;
@@ -215,9 +196,6 @@ export default function Footer() {
     return () => io.disconnect();
   }, []);
 
-
-
-  /* flashlight over the giant wordmark */
   const onWordMove = (e: React.PointerEvent<HTMLDivElement>) => {
     const el = wordRef.current;
     if (!el) return;
@@ -237,34 +215,31 @@ export default function Footer() {
     transitionDelay: inView ? `${d}s` : "0s",
   });
 
-  /* ---------------------------------------------------------------- */
   return (
     <footer
       ref={footRef}
       id="footer"
-      className="relative isolate bg-[color-mix(in_oklab,var(--nav-overlay-bg)_30%,#000)] text-nav-right-heading transition-colors duration-500 font-sans"
+      className="relative isolate bg-background text-foreground transition-colors duration-500 font-sans"
     >
       <style>{CSS}</style>
 
       {/* ============ BACKDROP ============ */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(90%_70%_at_50%_0%,var(--nav-right-from)_0%,transparent_60%)] opacity-25" />
-        <div className="absolute inset-0 opacity-40 [background-image:radial-gradient(var(--nav-right-line)_1px,transparent_1.6px)] [background-size:16px_16px] [mask-image:linear-gradient(to_bottom,transparent,#000_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(90%_70%_at_50%_0%,color-mix(in_srgb,var(--accent)_18%,transparent)_0%,transparent_60%)] opacity-25" />
+        <div className="absolute inset-0 opacity-40 [background-image:radial-gradient(var(--nav-left-line)_1px,transparent_1.6px)] [background-size:16px_16px] [mask-image:linear-gradient(to_bottom,transparent,#000_60%)]" />
 
         {/* top edge: light sweeping across */}
-        <div className="absolute inset-x-0 top-0 h-px overflow-hidden bg-nav-right-line">
+        <div className="absolute inset-x-0 top-0 h-px overflow-hidden bg-foreground/15">
           <span className="ft-sweep absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-transparent via-accent to-transparent" />
         </div>
 
         {/* forge glow from the bottom */}
-        <div className="ft-flicker absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-orange-600/25 via-red-700/10 to-transparent" />
-
-    
+        <div className="ft-flicker absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[color-mix(in_srgb,var(--accent)_25%,transparent)] via-[color-mix(in_srgb,var(--accent)_10%,transparent)] to-transparent" />
 
         {EMBERS.map(([l, dur, del, sz, dx], i) => (
           <span
             key={`e${i}`}
-            className="ft-rise absolute bottom-0 rounded-full bg-orange-400 shadow-[0_0_8px_2px_rgba(251,146,60,0.7)]"
+            className="ft-rise absolute bottom-0 rounded-full bg-[color-mix(in_srgb,var(--accent)_80%,#ff7a30)] shadow-[0_0_8px_2px_color-mix(in_srgb,var(--accent)_70%,transparent)]"
             style={
               {
                 left: `${l}%`,
@@ -280,7 +255,7 @@ export default function Footer() {
         {STARS.map(([l, t, d, sz], i) => (
           <span
             key={`s${i}`}
-            className="ft-twinkle absolute rounded-full bg-nav-right-heading"
+            className="ft-twinkle absolute rounded-full bg-foreground"
             style={{ left: `${l}%`, top: `${t}%`, width: sz, height: sz, animationDelay: `${d}s` }}
           />
         ))}
@@ -290,7 +265,7 @@ export default function Footer() {
       <div className="relative mx-auto grid w-full max-w-[1400px] gap-12 px-6 pb-12 pt-20 sm:grid-cols-2 sm:px-10 lg:grid-cols-4 lg:gap-12">
         {/* ---- 1 · Warrior Comics / ICO ---- */}
         <div style={rise(0.05)}>
-          <ColHead title="Warrior Comics" color="bg-red-500" show={inView} delay={0.05} />
+          <ColHead title="Warrior Comics" color="bg-accent" show={inView} delay={0.05} />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={LOGO}
@@ -298,11 +273,11 @@ export default function Footer() {
             draggable={false}
             className="mb-4 h-10 w-auto select-none object-contain"
           />
-          <p className="m-0 max-w-[18rem] text-[15px] leading-relaxed text-nav-right-text">
+          <p className="m-0 max-w-[18rem] text-[15px] leading-relaxed text-foreground/70">
             Participate in token sale. Track our ICO here.
           </p>
 
-          <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-nav-right-line bg-black/30 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-nav-right-text">
+          <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-foreground/15 bg-foreground/5 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-foreground/70">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
@@ -356,7 +331,7 @@ export default function Footer() {
 
         {/* ---- 3 · Policies + socials ---- */}
         <div style={rise(0.29)}>
-          <ColHead title="Policies" color="bg-pink-400" show={inView} delay={0.29} />
+          <ColHead title="Policies" color="bg-accent" show={inView} delay={0.29} />
           <ul className="m-0 flex list-none flex-col gap-3 p-0">
             {POLICIES.map((p) => (
               <li key={p.label}>
@@ -369,7 +344,7 @@ export default function Footer() {
           </ul>
 
           <div className="mt-6 flex flex-wrap gap-2.5">
-            {SOCIALS.map((s, i) => (
+            {SOCIALS.map((s) => (
               <a
                 key={s.label}
                 href={s.href}
@@ -377,15 +352,12 @@ export default function Footer() {
                 rel="noreferrer"
                 aria-label={s.label}
                 title={s.label}
-                className="group/s relative grid h-10 w-10 place-items-center overflow-hidden rounded-md border border-nav-right-line bg-black/30 text-[var(--brand)] no-underline backdrop-blur-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-[var(--brand)] hover:bg-[var(--brand)] hover:text-white hover:shadow-[0_12px_24px_-8px_var(--brand)]"
+                className={`group/s relative grid h-10 w-10 place-items-center overflow-hidden rounded-md border border-foreground/15 bg-foreground/5 text-[var(--brand)] no-underline backdrop-blur-sm transition-[transform,background-color,border-color,color,box-shadow,opacity] duration-300 hover:-translate-y-1.5 hover:border-[var(--brand)] hover:bg-[var(--brand)] hover:text-white hover:shadow-[0_12px_24px_-8px_var(--brand)] ${
+                  inView ? "scale-100 opacity-100" : "scale-[0.4] opacity-0"
+                }`}
                 style={
                   {
                     "--brand": s.brand,
-                    opacity: inView ? 1 : 0,
-                    transform: inView ? "scale(1)" : "scale(0.4)",
-                    transition: `opacity 0.5s ease-out ${0.55 + i * 0.08}s, transform 0.6s cubic-bezier(.2,.9,.3,1.3) ${
-                      0.55 + i * 0.08
-                    }s, background-color .3s, border-color .3s, color .3s, box-shadow .3s`,
                   } as React.CSSProperties
                 }
               >
@@ -406,10 +378,10 @@ export default function Footer() {
 
         {/* ---- 4 · Address ---- */}
         <div style={rise(0.41)}>
-          <ColHead title="Address Information" color="bg-cyan-400" show={inView} delay={0.41} />
-          <ul className="m-0 flex list-none flex-col gap-5 p-0 text-[15px] text-nav-right-text">
+          <ColHead title="Address Information" color="bg-accent" show={inView} delay={0.41} />
+          <ul className="m-0 flex list-none flex-col gap-5 p-0 text-[15px] text-foreground/70">
             <li className="flex items-start gap-3">
-              <span className="mt-0.5 text-cyan-300">
+              <span className="mt-0.5 text-accent">
                 <Line d={PIN} />
               </span>
               <span className="leading-relaxed">
@@ -420,7 +392,7 @@ export default function Footer() {
             </li>
             <li>
               <a href={`mailto:${EMAIL}`} className={`${linkCls} gap-3`}>
-                <span className="text-cyan-300 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110">
+                <span className="text-accent transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110">
                   <Line d={MAIL} />
                 </span>
                 <span className="break-all">{EMAIL}</span>
@@ -428,7 +400,7 @@ export default function Footer() {
             </li>
             <li>
               <a href={PHONE_HREF} className={`${linkCls} gap-3`}>
-                <span className="text-cyan-300 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110">
+                <span className="text-accent transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110">
                   <Line d={PHONE_ICON} />
                 </span>
                 {PHONE}
@@ -443,41 +415,32 @@ export default function Footer() {
         ref={wordRef}
         onPointerMove={onWordMove}
         onPointerLeave={onWordLeave}
-        className="relative mx-auto max-w-[1600px] select-none overflow-hidden px-2"
-        style={{ height: "clamp(3rem, 11.5vw, 10.5rem)" }}
+        className="relative mx-auto max-w-[1600px] select-none overflow-hidden px-2 h-[clamp(3rem,11.5vw,10.5rem)]"
         aria-hidden
       >
         <div
-          className="font-serif font-bold uppercase  tracking-[0.02em] whitespace-nowrap text-center text-3xl sm:text-[clamp(3rem,7vw,12rem)]"
-          style={{
-            transform: inView ? "translateY(0)" : "translateY(70%)",
-            opacity: inView ? 1 : 0,
-            transition: `transform 1.4s ${EASE} 0.4s, opacity 1s ease-out 0.4s`,
-          }}
+          className={`font-serif font-bold uppercase tracking-[0.02em] whitespace-nowrap text-center text-3xl sm:text-[clamp(3rem,7vw,12rem)] transition-[transform,opacity] duration-[1400ms,1000ms] ease-[cubic-bezier(0.77,0,0.175,1),ease-out] delay-[400ms] ${
+            inView ? "translate-y-0 opacity-100" : "translate-y-[70%] opacity-0"
+          }`}
         >
           {/* outline */}
-          <span className="block text-transparent [-webkit-text-stroke:1px_var(--nav-right-line)]">
+          <span className="block text-transparent [-webkit-text-stroke:1px_var(--nav-left-line)]">
             {WORDMARK}
           </span>
           {/* idle shimmer */}
           <span
-            className="ft-shimmer absolute inset-x-0 top-0 block bg-clip-text text-transparent opacity-70"
+            className="ft-shimmer absolute inset-x-0 top-0 block bg-clip-text text-transparent opacity-70 [background-size:200%_100%]"
             style={{
               backgroundImage:
                 "linear-gradient(100deg, transparent 35%, color-mix(in srgb, var(--accent) 65%, transparent) 50%, transparent 65%)",
-              backgroundSize: "200% 100%",
             }}
           >
             {WORDMARK}
           </span>
           {/* cursor flashlight */}
           <span
-            className="absolute inset-x-0 top-0 block bg-clip-text text-transparent transition-opacity duration-300"
-            style={{
-              opacity: "var(--lit, 0)" as unknown as number,
-              backgroundImage:
-                "radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), var(--accent), transparent 70%)",
-            }}
+            className="absolute inset-x-0 top-0 block bg-clip-text text-transparent transition-opacity duration-300 [background-image:radial-gradient(240px_circle_at_var(--mx,50%)_var(--my,50%),var(--accent),transparent_70%)]"
+            style={{ opacity: "var(--lit, 0)" as unknown as number }}
           >
             {WORDMARK}
           </span>
@@ -485,12 +448,12 @@ export default function Footer() {
       </div>
 
       {/* ============ BOTTOM BAR ============ */}
-      <div className="relative border-t border-nav-right-line bg-black/40 backdrop-blur-sm">
+      <div className="relative border-t border-foreground/15 bg-foreground/5 backdrop-blur-sm">
         <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-center gap-2 px-5 py-4 text-center sm:flex-row sm:gap-4 sm:px-8">
           <span aria-hidden className="ft-spin hidden text-accent sm:inline-block">
             ✳
           </span>
-          <p className="m-0 text-sm font-semibold tracking-wide text-nav-right-heading sm:text-[15px]">
+          <p className="m-0 text-sm font-semibold tracking-wide text-foreground sm:text-[15px]">
             Copyright &copy; <span suppressHydrationWarning>{new Date().getFullYear()}</span> Warrior
             Comics | All rights reserved.
           </p>

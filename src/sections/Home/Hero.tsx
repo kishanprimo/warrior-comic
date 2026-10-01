@@ -135,39 +135,6 @@ export default function Hero() {
   const ringRef = useRef<HTMLDivElement>(null);
   const dotRef = useRef<HTMLDivElement>(null);
 
-  const [entered, setEntered] = useState(false);
-
-  /* ---- Entrance ---- */
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    let first = true;
-    let timer: ReturnType<typeof setTimeout> | undefined;
-
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (timer) clearTimeout(timer);
-        if (entry.isIntersecting) {
-          if (first) {
-            first = false;
-            timer = setTimeout(() => setEntered(true), INTRO_DELAY_MS);
-          } else {
-            setEntered(true);
-          }
-        } else {
-          first = false;
-          setEntered(false);
-        }
-      },
-      { threshold: [0, 0.02] }
-    );
-    io.observe(el);
-    return () => {
-      io.disconnect();
-      if (timer) clearTimeout(timer);
-    };
-  }, []);
-
   /* ---- Scroll-linked timeline ---- */
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -397,9 +364,7 @@ export default function Hero() {
         <div
           className="absolute inset-0 bg-nav-left text-nav-left-fg transition-colors duration-500 motion-reduce:transition-none"
           style={{
-            clipPath: entered
-              ? "inset(0% 0% 0% 0% round 0px)"
-              : "inset(40% 14% 0% 14% round 14px)",
+            clipPath: "inset(0% 0% 0% 0% round 0px)",
             transition: `clip-path 1.5s ${EASE}, background-color 0.5s ease, color 0.5s ease`,
           }}
         >
@@ -438,9 +403,8 @@ export default function Hero() {
             aria-hidden
             className="pointer-events-none absolute left-1/2 top-[56%] aspect-square w-[min(66vh,76vw)] -translate-x-1/2 -translate-y-1/2 will-change-transform"
             style={{
-              opacity: entered ? 1 : 0,
+              opacity: 1,
               transition: "opacity 1.2s ease-out",
-              transitionDelay: entered ? "0.9s" : "0s",
             }}
           >
             <div className="absolute inset-0 rounded-full border border-nav-left-line transition-colors duration-500" />
@@ -476,9 +440,8 @@ export default function Hero() {
             className="pointer-events-none absolute inset-x-0 bottom-[5vh] flex h-0 justify-center"
             style={{
               perspective: 800,
-              opacity: entered ? 1 : 0,
+              opacity: 1,
               transition: "opacity 1.4s ease-out",
-              transitionDelay: entered ? "1.1s" : "0s",
             }}
           >
             <div
@@ -519,8 +482,8 @@ export default function Hero() {
                 alt="Avatarman"
                 className="h-full w-full select-none object-contain object-bottom drop-shadow-[0_25px_40px_rgba(0,0,0,0.45)]"
                 style={{
-                  transform: entered ? "scale(1)" : "scale(1.25)",
-                  opacity: entered ? 1 : 0,
+                  transform: "scale(1)",
+                  opacity: 1,
                   transition: `transform 1.6s ${EASE} 0.15s, opacity 0.9s ease-out 0.15s`,
                 }}
                 draggable={false}
@@ -540,9 +503,9 @@ export default function Hero() {
                     <span
                       className="block"
                       style={{
-                        transform: entered ? "translateY(0)" : "translateY(115%)",
+                        transform: "translateY(0)",
                         transition: `transform 1s ${EASE}`,
-                        transitionDelay: entered ? `${0.7 + i * 0.05}s` : "0s",
+                        transitionDelay: `${0.7 + i * 0.05}s`,
                       }}
                     >
                       {ch}
@@ -553,10 +516,10 @@ export default function Hero() {
               <p
                 className="mt-3 font-serif text-[11px] uppercase tracking-[0.3em] sm:text-sm"
                 style={{
-                  opacity: entered ? 1 : 0,
-                  transform: entered ? "translateY(0)" : "translateY(14px)",
+                  opacity: 1,
+                  transform: "translateY(0)",
                   transition: "opacity 0.9s ease-out, transform 0.9s ease-out",
-                  transitionDelay: entered ? "1.4s" : "0s",
+                  transitionDelay: "1.4s",
                 }}
               >
                 {SUBTITLE}

@@ -11,10 +11,9 @@ export default function BottomToTop() {
   useEffect(() => {
     let raf = 0;
 
-
     const read = () => {
       // Show button when we start scrolling down from the top
-      const scrollThreshold = 20; // Show button as soon as scrolling starts
+      const scrollThreshold = 20;
       const hasScrolled = window.scrollY > scrollThreshold;
 
       setVisible(hasScrolled);
@@ -43,7 +42,7 @@ export default function BottomToTop() {
       aria-label="Back to top"
       aria-hidden={!visible}
       tabIndex={visible ? 0 : -1}
-      className={`group fixed bottom-8 right-4 z-9999 grid h-12 w-12 cursor-pointer place-items-center rounded-full border-none bg-nav-overlay p-0 text-nav-right-heading shadow-[0_10px_30px_-8px_rgba(0,0,0,0.7)] transition-all duration-500 hover:-translate-y-1 hover:scale-105 sm:right-8 ${
+      className={`group fixed bottom-8 right-4 z-[9999] grid h-12 w-12 cursor-pointer place-items-center rounded-full border border-foreground/15 bg-background/85 p-0 text-foreground shadow-[0_10px_30px_-8px_rgba(0,0,0,0.35)] backdrop-blur-md transition-all duration-500 hover:-translate-y-1 hover:scale-105 hover:border-accent hover:shadow-[0_0_24px_-4px_var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 sm:right-8 ${
         visible
           ? "translate-y-0 opacity-100"
           : "pointer-events-none translate-y-6 opacity-0"
@@ -55,7 +54,7 @@ export default function BottomToTop() {
         viewBox="0 0 48 48"
         className="absolute inset-0 h-full w-full -rotate-90"
       >
-        <circle cx="24" cy="24" r="20" fill="none" stroke="var(--nav-right-line)" strokeWidth="2" />
+        <circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" strokeOpacity="0.15" strokeWidth="2" />
         <circle
           cx="24"
           cy="24"

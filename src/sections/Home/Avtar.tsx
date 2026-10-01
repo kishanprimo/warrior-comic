@@ -97,7 +97,7 @@ export default function Avtar() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  return (
+return (
     <section
       id="avatars"
       className="relative z-20 -mt-12 sm:-mt-20 md:-mt-28 bg-transparent font-sans overflow-x-clip select-none"
@@ -111,8 +111,7 @@ export default function Avtar() {
         {/* Blue band */}
         <div
           aria-hidden
-          className="absolute inset-x-0 top-[60px] sm:top-[80px] md:top-[110px] h-[220px] sm:h-[240px] md:h-[265px]"
-          style={{ background: "#17789e" }}
+          className="absolute inset-x-0 top-[60px] sm:top-[80px] md:top-[110px] h-[220px] sm:h-[240px] md:h-[265px] bg-[#17789e]"
         />
 
         {/* Slides */}
@@ -122,13 +121,9 @@ export default function Avtar() {
             <div
               key={si}
               aria-hidden={!on}
-              className="absolute inset-0"
-              style={{
-                opacity: on ? 1 : 0,
-                pointerEvents: on ? "auto" : "none",
-                transition: "opacity 0.7s ease",
-                zIndex: on ? 2 : 1,
-              }}
+              className={`absolute inset-0 transition-opacity duration-700 ease ${
+                on ? "opacity-100 pointer-events-auto z-[2]" : "opacity-0 pointer-events-none z-[1]"
+              }`}
             >
               {/* Left Characters */}
               <div className="absolute left-0 top-[10px] sm:top-[14px] md:top-[30px] flex items-end pointer-events-none pl-0 md:pl-[2%] max-w-[32%] sm:max-w-none">
@@ -139,14 +134,9 @@ export default function Avtar() {
                     src={src}
                     alt=""
                     draggable={false}
-                    className={`block w-auto max-w-full sm:max-w-none select-none object-contain h-[200px] xs:h-[240px] sm:h-[310px] md:h-[400px] ${
-                      k > 0 ? "-ml-8 sm:-ml-12 md:-ml-16 hidden 2xl:block" : ""
-                    }`}
-                    style={{
-                      transform: on ? "translateX(0)" : "translateX(-40px)",
-                      transition: "transform 0.9s cubic-bezier(0.22,1,0.36,1)",
-                      filter: "drop-shadow(0 0 22px rgba(120,220,255,0.35))",
-                    }}
+                    className={`block w-auto max-w-full sm:max-w-none select-none object-contain h-[200px] xs:h-[240px] sm:h-[310px] md:h-[400px] drop-shadow-[0_0_22px_rgba(120,220,255,0.35)] transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                      on ? "translate-x-0" : "-translate-x-[40px]"
+                    } ${k > 0 ? "-ml-8 sm:-ml-12 md:-ml-16 hidden 2xl:block" : ""}`}
                   />
                 ))}
               </div>
@@ -160,14 +150,9 @@ export default function Avtar() {
                     src={src}
                     alt=""
                     draggable={false}
-                    className={`block w-auto max-w-full sm:max-w-none select-none object-contain h-[200px] xs:h-[240px] sm:h-[310px] md:h-[400px] ${
-                      k > 0 ? "-mr-8 sm:-mr-12 md:-mr-16 hidden 2xl:block" : ""
-                    }`}
-                    style={{
-                      transform: on ? "translateX(0)" : "translateX(40px)",
-                      transition: "transform 0.9s cubic-bezier(0.22,1,0.36,1)",
-                      filter: "drop-shadow(0 0 22px rgba(120,220,255,0.35))",
-                    }}
+                    className={`block w-auto max-w-full sm:max-w-none select-none object-contain h-[200px] xs:h-[240px] sm:h-[310px] md:h-[400px] drop-shadow-[0_0_22px_rgba(120,220,255,0.35)] transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                      on ? "translate-x-0" : "translate-x-[40px]"
+                    } ${k > 0 ? "-mr-8 sm:-mr-12 md:-mr-16 hidden 2xl:block" : ""}`}
                   />
                 ))}
               </div>
@@ -178,16 +163,10 @@ export default function Avtar() {
                   {s.cards.map((c, ci) => (
                     <div
                       key={ci}
-                      className={`flex items-start gap-2 sm:gap-3 ${
-                        ci === 1 ? "hidden sm:flex" : ""
-                      }`}
-                      style={{
-                        transform: on ? "translateY(0)" : "translateY(12px)",
-                        opacity: on ? 1 : 0,
-                        transition: `transform 0.7s cubic-bezier(0.22,1,0.36,1) ${
-                          0.08 + ci * 0.08
-                        }s, opacity 0.7s ease ${0.08 + ci * 0.08}s`,
-                      }}
+                      className={`flex items-start gap-2 sm:gap-3 transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1),ease] ${
+                        on ? "translate-y-0 opacity-100" : "translate-y-[12px] opacity-0"
+                      } ${ci === 1 ? "hidden sm:flex" : ""}`}
+                      style={{ transitionDelay: `${0.08 + ci * 0.08}s` }}
                     >
                       <svg
                         aria-hidden
@@ -211,14 +190,7 @@ export default function Avtar() {
                         </p>
                         <a
                           href={c.href}
-                          className="inline-block px-2.5 sm:px-3.5 py-1 sm:py-1.5 text-[10px] sm:text-xs md:text-[13px] font-bold text-white no-underline transition-colors duration-200"
-                          style={{ background: "#c8102e" }}
-                          onMouseEnter={(e) =>
-                            (e.currentTarget.style.background = "#a30d25")
-                          }
-                          onMouseLeave={(e) =>
-                            (e.currentTarget.style.background = "#c8102e")
-                          }
+                          className="inline-block px-2.5 sm:px-3.5 py-1 sm:py-1.5 text-[10px] sm:text-xs md:text-[13px] font-bold text-white no-underline bg-[#c8102e] transition-colors duration-200 hover:bg-[#a30d25]"
                         >
                           Read more
                         </a>
@@ -240,13 +212,9 @@ export default function Avtar() {
                 type="button"
                 aria-label={`Go to slide ${i + 1}`}
                 onClick={() => setIndex(i)}
-                className="p-0 border-none cursor-pointer rounded-full transition-all duration-300"
-                style={{
-                  width: i === index ? 26 : 10,
-                  height: 10,
-                  background:
-                    i === index ? "#ffffff" : "rgba(255,255,255,0.4)",
-                }}
+                className={`h-[10px] p-0 border-none cursor-pointer rounded-full transition-all duration-300 ${
+                  i === index ? "w-[26px] bg-white" : "w-[10px] bg-white/40"
+                }`}
               />
             ))}
           </div>

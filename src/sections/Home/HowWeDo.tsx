@@ -226,7 +226,7 @@ export default function HowWeDo() {
     blockRefs.current[i] = el;
   };
 
-  /* ---------------------------------------------------------------- */
+/* ---------------------------------------------------------------- */
   return (
     <section
       ref={sectionRef}
@@ -250,7 +250,6 @@ export default function HowWeDo() {
           className="absolute inset-0 opacity-40 [background-image:linear-gradient(var(--nav-left-line)_1px,transparent_1px),linear-gradient(90deg,var(--nav-left-line)_1px,transparent_1px)] [background-size:84px_84px]"
         />
 
-      
         {/* outlined marquee text */}
         <div
           aria-hidden
@@ -258,8 +257,7 @@ export default function HowWeDo() {
         >
           <div
             ref={markRef}
-            className="w-max whitespace-nowrap font-serif text-[clamp(4rem,12vw,10rem)] font-bold uppercase leading-none text-transparent opacity-40"
-            style={{ WebkitTextStroke: "1px var(--nav-left-line)" }}
+            className="w-max whitespace-nowrap font-serif text-[clamp(4rem,12vw,10rem)] font-bold uppercase leading-none text-transparent opacity-40 [-webkit-text-stroke:1px_var(--nav-left-line)]"
           >
             {MARQUEE.repeat(4)}
           </div>
@@ -269,12 +267,9 @@ export default function HowWeDo() {
         <div className="relative z-10 mx-auto flex h-full w-full max-w-7xl flex-col px-4 py-3 sm:px-6 sm:py-5 lg:px-10 lg:py-6">
           {/* Heading */}
           <header
-            className="relative shrink-0 text-center"
-            style={{
-              opacity: mounted ? 1 : 0,
-              transform: mounted ? "translateY(0)" : "translateY(24px)",
-              transition: "opacity 0.8s ease, transform 0.8s ease",
-            }}
+            className={`relative shrink-0 text-center transition-[opacity,transform] duration-[800ms] ease ${
+              mounted ? "translate-y-0 opacity-100" : "translate-y-[24px] opacity-0"
+            }`}
           >
             {/* giant C watermark (as on the site) */}
             <span
@@ -284,12 +279,9 @@ export default function HowWeDo() {
               C
             </span>
 
-           
-
             <h2 className="relative m-0 font-serif text-2xl font-bold uppercase leading-tight tracking-[0.12em] sm:text-4xl lg:text-5xl">
               {HEADING}
             </h2>
-          
           </header>
 
           {/* Main area: video (left column) + content (right column) */}
@@ -301,20 +293,15 @@ export default function HowWeDo() {
             <div className="relative z-20 lg:col-span-7">
               <div
                 ref={frameRef}
-                className="relative mx-auto w-full max-w-[760px] will-change-transform"
-                style={{ transformOrigin: "0 0" }}
+                className="relative mx-auto w-full max-w-[760px] [transform-origin:0_0] will-change-transform"
               >
                 {/* pulsing glow behind the frame */}
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute left-1/2 top-1/2 h-[90%] w-[90%] rounded-full wc-glow-pulse"
-                  style={{
-                    background:
-                      "radial-gradient(closest-side, color-mix(in srgb, var(--accent) 45%, transparent), transparent 70%)",
-                  }}
+                  className="pointer-events-none absolute left-1/2 top-1/2 h-[90%] w-[90%] rounded-full wc-glow-pulse bg-[radial-gradient(closest-side,color-mix(in_srgb,var(--accent)_45%,transparent),transparent_70%)]"
                 />
 
-                {/* film perforations (desktop) */}
+                {/* film perforations (desktop) — style applied via JS because it's a shared `perfStyle` object */}
                 <div
                   ref={(el) => {
                     perfRefs.current[0] = el;
@@ -394,7 +381,7 @@ export default function HowWeDo() {
 
             {/* ===== RIGHT: content that arrives on scroll ===== */}
             <div className="relative z-10 flex min-h-0 flex-col gap-2 sm:gap-3 lg:col-span-5">
-              {/* slideshow (the two slides from the site) */}
+              {/* slideshow (the two slides from the site) — opacity animated by JS scroll timeline */}
               <div
                 ref={setBlock(0)}
                 className="relative aspect-[21/9] w-full overflow-hidden rounded-xl border border-nav-left-line bg-nav-overlay shadow-lg will-change-transform lg:aspect-[16/7]"
@@ -407,8 +394,9 @@ export default function HowWeDo() {
                     src={src}
                     alt={`Warrior Comics slide ${i + 1}`}
                     draggable={false}
-                    className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700"
-                    style={{ opacity: i === slide ? 1 : 0 }}
+                    className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+                      i === slide ? "opacity-100" : "opacity-0"
+                    }`}
                   />
                 ))}
                 <div
@@ -430,7 +418,7 @@ export default function HowWeDo() {
                 </div>
               </div>
 
-              {/* stories from the blog */}
+              {/* stories from the blog — opacity animated by JS scroll timeline */}
               {STORIES.map((s, i) => (
                 <div
                   key={s.title}
@@ -461,7 +449,7 @@ export default function HowWeDo() {
                 </div>
               ))}
 
-              {/* CTA */}
+              {/* CTA — opacity animated by JS scroll timeline */}
               <div
                 ref={setBlock(4)}
                 className="flex flex-wrap items-center gap-3 will-change-transform"
