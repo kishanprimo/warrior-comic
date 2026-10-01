@@ -5,10 +5,10 @@ import React, { useEffect, useRef, useState } from "react";
 /* ------------------------------------------------------------------ */
 /* Content (from warriorcomics.com)                                    */
 /* ------------------------------------------------------------------ */
-const BASE = "/wc-content/Images";
-const BG_IMG = `${BASE}/artist.jpg`;
-const HERO_L = `${BASE}/avtarman.png`;
-const HERO_R = `${BASE}/sentor-1.png`;
+const AVATAR_BASE = "/Images/Avtar";
+const BG_IMG = `${AVATAR_BASE}/artist.jpg`;        // artist.jpg not in the list — see note below
+const HERO_L = `${AVATAR_BASE}/avtarman1.png`;
+const HERO_R = `${AVATAR_BASE}/sentor-1.png`;
 
 const HEADING = "We'd love to hear about your project.";
 
