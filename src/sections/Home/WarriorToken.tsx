@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 /* ------------------------------------------------------------------ */
 /* Content (from warriorcomics.com)                                    */
 /* ------------------------------------------------------------------ */
-const LOGO = "/wc-content/Images/warrior-token-logo.png";
+const LOGO = "/Images/Imgs/warrior-token-logo.png";
 const HEADING = "ICO presale will start soon";
 const BODY =
   "We would like to invite you all to participate in the Warrior Token sale. With your support we will be able to raise fund for this revolutionary platform. We will continue to share the updates of the project here and on our communities. Stay tuned!";
@@ -485,7 +485,7 @@ export default function WarriorToken() {
   const raisedPct = (RAISED_M / HARDCAP_M) * 100;
   const softPct = (SOFTCAP_M / HARDCAP_M) * 100;
 
-  /* ---------------------------------------------------------------- */
+/* ---------------------------------------------------------------- */
   return (
     <section
       ref={sectionRef}
@@ -528,7 +528,7 @@ export default function WarriorToken() {
         </div>
       </div>
 
-      {/* twinkling sparks */}
+      {/* twinkling sparks — positions & sizes come from SPARKS array */}
       {SPARKS.map(([l, t, d, sz], i) => (
         <span
           key={i}
@@ -548,17 +548,14 @@ export default function WarriorToken() {
       <div className="relative z-10 mx-auto grid min-h-screen w-full max-w-[1600px] items-center gap-12 px-6 py-24 sm:px-10 lg:grid-cols-[1fr_1.3fr] lg:gap-20 lg:px-16 xl:px-24">
         {/* ---------- LEFT: logo ---------- */}
         <div ref={logoParRef} className="relative mx-auto w-full max-w-[600px] will-change-transform">
-          <div style={{ perspective: 900 }}>
+          <div className="[perspective:900px]">
             <div ref={logoBoxRef} className="relative">
               {/* orbit rings behind the emblem (continuous) */}
               <div
                 aria-hidden
-                className="pointer-events-none absolute left-1/2 top-[36%] aspect-square w-[88%] -translate-x-1/2 -translate-y-1/2"
-                style={{
-                  opacity: open ? 1 : 0,
-                  transition: "opacity 1.2s ease-out",
-                  transitionDelay: open ? "0.7s" : "0s",
-                }}
+                className={`pointer-events-none absolute left-1/2 top-[36%] aspect-square w-[88%] -translate-x-1/2 -translate-y-1/2 transition-opacity duration-[1200ms] ease-out ${
+                  open ? "opacity-100 delay-[700ms]" : "opacity-0 delay-0"
+                }`}
               >
                 <div className="wt-pulse absolute inset-[6%] rounded-full bg-orange-500/20 blur-3xl" />
                 <div className="absolute inset-0 rounded-full border border-nav-right-line" />
@@ -579,15 +576,11 @@ export default function WarriorToken() {
                   src={LOGO}
                   alt="Warrior Token"
                   draggable={false}
-                  className="relative w-full select-none drop-shadow-[0_30px_40px_rgba(0,0,0,0.6)]"
-                  style={{
-                    clipPath: open ? "inset(0 0 0% 0)" : "inset(0 0 100% 0)",
-                    opacity: open ? 1 : 0,
-                    transform: open ? "scale(1) rotate(0deg)" : "scale(1.18) rotate(-6deg)",
-                    filter: open ? "blur(0px)" : "blur(12px)",
-                    transition: `clip-path 1.4s ${EASE}, transform 1.6s ${EASE}, filter 1.2s ease-out, opacity 0.6s ease-out`,
-                    transitionDelay: open ? "0.25s" : "0s",
-                  }}
+                  className={`relative w-full select-none drop-shadow-[0_30px_40px_rgba(0,0,0,0.6)] transition-[clip-path,transform,filter,opacity] duration-[1400ms,1600ms,1200ms,600ms] ease-[cubic-bezier(0.77,0,0.175,1),cubic-bezier(0.77,0,0.175,1),ease-out,ease-out] ${
+                    open
+                      ? "scale-100 rotate-0 opacity-100 blur-0 [clip-path:inset(0_0_0%_0)] delay-[250ms]"
+                      : "scale-[1.18] -rotate-6 opacity-0 blur-[12px] [clip-path:inset(0_0_100%_0)] delay-0"
+                  }`}
                 />
               </div>
             </div>
@@ -607,12 +600,10 @@ export default function WarriorToken() {
                 className="inline-block overflow-hidden py-1 pr-[0.28em] align-bottom"
               >
                 <span
-                  className="block"
-                  style={{
-                    transform: open ? "translateY(0)" : "translateY(115%)",
-                    transition: `transform 1s ${EASE}`,
-                    transitionDelay: open ? `${0.35 + i * 0.09}s` : "0s",
-                  }}
+                  className={`block transition-transform duration-1000 ease-[cubic-bezier(0.77,0,0.175,1)] ${
+                    open ? "translate-y-0" : "translate-y-[115%]"
+                  }`}
+                  style={{ transitionDelay: open ? `${0.35 + i * 0.09}s` : "0s" }}
                 >
                   {w}
                 </span>
@@ -637,13 +628,10 @@ export default function WarriorToken() {
             <div className="relative mt-2 h-4 w-full overflow-hidden rounded-full bg-nav-right-heading/90">
               {/* raised amount */}
               <span
-                className="absolute inset-y-0 left-0 origin-left rounded-full bg-accent"
-                style={{
-                  width: `${raisedPct}%`,
-                  transform: open ? "scaleX(1)" : "scaleX(0)",
-                  transition: `transform 1.4s ${EASE}`,
-                  transitionDelay: open ? "1.1s" : "0s",
-                }}
+                className={`absolute inset-y-0 left-0 origin-left rounded-full bg-accent transition-transform duration-[1400ms] ease-[cubic-bezier(0.77,0,0.175,1)] ${
+                  open ? "scale-x-100 delay-[1100ms]" : "scale-x-0 delay-0"
+                }`}
+                style={{ width: `${raisedPct}%` }}
               />
               {/* softcap marker */}
               <span
@@ -695,32 +683,26 @@ export default function WarriorToken() {
         className="pointer-events-none absolute inset-0 z-[15] h-full w-full"
       />
 
-          {/* ============ LOADER: two doors that split open ============ */}
+      {/* ============ LOADER: two doors that split open ============ */}
       <div
         aria-hidden={open}
         className={`absolute inset-0 z-30 text-background ${open ? "pointer-events-none" : ""}`}
       >
         <div
-          className="absolute inset-x-0 top-0 h-1/2 bg-foreground"
-          style={{
-            transform: open ? "translateY(-101%)" : "translateY(0)",
-            transition: `transform 0.7s ${EASE}`,
-          }}
+          className={`absolute inset-x-0 top-0 h-1/2 bg-foreground transition-transform duration-700 ease-[cubic-bezier(0.77,0,0.175,1)] ${
+            open ? "-translate-y-[101%]" : "translate-y-0"
+          }`}
         />
         <div
-          className="absolute inset-x-0 bottom-0 h-1/2 bg-foreground"
-          style={{
-            transform: open ? "translateY(101%)" : "translateY(0)",
-            transition: `transform 0.7s ${EASE}`,
-          }}
+          className={`absolute inset-x-0 bottom-0 h-1/2 bg-foreground transition-transform duration-700 ease-[cubic-bezier(0.77,0,0.175,1)] ${
+            open ? "translate-y-[101%]" : "translate-y-0"
+          }`}
         />
 
         <div
-          className="absolute inset-0 grid place-items-center"
-          style={{
-            opacity: open ? 0 : 1,
-            transition: "opacity 0.25s ease-out",
-          }}
+          className={`absolute inset-0 grid place-items-center transition-opacity duration-[250ms] ease-out ${
+            open ? "opacity-0" : "opacity-100"
+          }`}
         >
           <div className="text-center">
             <p className="font-serif text-[clamp(1.8rem,4.5vw,3.4rem)] font-semibold uppercase tracking-[0.18em]">
@@ -731,8 +713,7 @@ export default function WarriorToken() {
             <span className="relative mx-auto mt-7 block h-2 w-[min(70vw,420px)] overflow-hidden rounded-full bg-background/25">
               <span
                 ref={lineRef}
-                className="absolute inset-0 origin-left rounded-full bg-accent"
-                style={{ transform: "scaleX(0)" }}
+                className="absolute inset-0 origin-left scale-x-0 rounded-full bg-accent"
               />
             </span>
 

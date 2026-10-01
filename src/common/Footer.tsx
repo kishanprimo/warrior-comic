@@ -6,8 +6,8 @@ import Link from "next/link";
 /* ------------------------------------------------------------------ */
 /* Content (from warriorcomics.com)                                    */
 /* ------------------------------------------------------------------ */
-const BASE = "/wc-content/Images";
-const LOGO = `${BASE}/Warrior-Comics-logo-3.png`;
+const BASE = "/Images/Imgs";
+const LOGO = `${BASE}/Logo.png`;
 const TOKEN_LOGO = `${BASE}/warrior-token-logo.png`;
 
 const ICO_HREF = "https://warriortoken.com/";
@@ -20,13 +20,13 @@ const MENUS = [
   { label: "Comics", href: "/comics" },
   { label: "Videos", href: "/videos" },
   { label: "Blog", href: "/blog" },
-  { label: "News", href: "/news" },
+  // { label: "News", href: "/news" },
   { label: "FAQ", href: "/faq" },
 ];
 
 const POLICIES = [
-  { label: "Terms & Conditions", href: "#" },
-  { label: "Privacy Policy", href: "#" },
+  { label: "Terms & Conditions", href: "/terms" },
+  { label: "Privacy Policy", href: "/privacy" },
 ];
 
 const SOCIALS = [
@@ -237,7 +237,7 @@ export default function Footer() {
     transitionDelay: inView ? `${d}s` : "0s",
   });
 
-  /* ---------------------------------------------------------------- */
+/* ---------------------------------------------------------------- */
   return (
     <footer
       ref={footRef}
@@ -258,8 +258,6 @@ export default function Footer() {
 
         {/* forge glow from the bottom */}
         <div className="ft-flicker absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-orange-600/25 via-red-700/10 to-transparent" />
-
-    
 
         {EMBERS.map(([l, dur, del, sz, dx], i) => (
           <span
@@ -377,15 +375,13 @@ export default function Footer() {
                 rel="noreferrer"
                 aria-label={s.label}
                 title={s.label}
-                className="group/s relative grid h-10 w-10 place-items-center overflow-hidden rounded-md border border-nav-right-line bg-black/30 text-[var(--brand)] no-underline backdrop-blur-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-[var(--brand)] hover:bg-[var(--brand)] hover:text-white hover:shadow-[0_12px_24px_-8px_var(--brand)]"
+                className={`group/s relative grid h-10 w-10 place-items-center overflow-hidden rounded-md border border-nav-right-line bg-black/30 text-[var(--brand)] no-underline backdrop-blur-sm transition-[transform,background-color,border-color,color,box-shadow,opacity] duration-300 hover:-translate-y-1.5 hover:border-[var(--brand)] hover:bg-[var(--brand)] hover:text-white hover:shadow-[0_12px_24px_-8px_var(--brand)] ${
+                  inView ? "scale-100 opacity-100" : "scale-[0.4] opacity-0"
+                }`}
                 style={
                   {
                     "--brand": s.brand,
-                    opacity: inView ? 1 : 0,
-                    transform: inView ? "scale(1)" : "scale(0.4)",
-                    transition: `opacity 0.5s ease-out ${0.55 + i * 0.08}s, transform 0.6s cubic-bezier(.2,.9,.3,1.3) ${
-                      0.55 + i * 0.08
-                    }s, background-color .3s, border-color .3s, color .3s, box-shadow .3s`,
+                    transitionDelay: `${0.55 + i * 0.08}s`,
                   } as React.CSSProperties
                 }
               >
@@ -443,41 +439,32 @@ export default function Footer() {
         ref={wordRef}
         onPointerMove={onWordMove}
         onPointerLeave={onWordLeave}
-        className="relative mx-auto max-w-[1600px] select-none overflow-hidden px-2"
-        style={{ height: "clamp(3rem, 11.5vw, 10.5rem)" }}
+        className="relative mx-auto max-w-[1600px] select-none overflow-hidden px-2 h-[clamp(3rem,11.5vw,10.5rem)]"
         aria-hidden
       >
         <div
-          className="font-serif font-bold uppercase  tracking-[0.02em] whitespace-nowrap text-center text-3xl sm:text-[clamp(3rem,7vw,12rem)]"
-          style={{
-            transform: inView ? "translateY(0)" : "translateY(70%)",
-            opacity: inView ? 1 : 0,
-            transition: `transform 1.4s ${EASE} 0.4s, opacity 1s ease-out 0.4s`,
-          }}
+          className={`font-serif font-bold uppercase tracking-[0.02em] whitespace-nowrap text-center text-3xl sm:text-[clamp(3rem,7vw,12rem)] transition-[transform,opacity] duration-[1400ms,1000ms] ease-[cubic-bezier(0.77,0,0.175,1),ease-out] delay-[400ms] ${
+            inView ? "translate-y-0 opacity-100" : "translate-y-[70%] opacity-0"
+          }`}
         >
           {/* outline */}
           <span className="block text-transparent [-webkit-text-stroke:1px_var(--nav-right-line)]">
             {WORDMARK}
           </span>
-          {/* idle shimmer */}
+          {/* idle shimmer — background-image references --accent; keep inline for the CSS var interpolation */}
           <span
-            className="ft-shimmer absolute inset-x-0 top-0 block bg-clip-text text-transparent opacity-70"
+            className="ft-shimmer absolute inset-x-0 top-0 block bg-clip-text text-transparent opacity-70 [background-size:200%_100%]"
             style={{
               backgroundImage:
                 "linear-gradient(100deg, transparent 35%, color-mix(in srgb, var(--accent) 65%, transparent) 50%, transparent 65%)",
-              backgroundSize: "200% 100%",
             }}
           >
             {WORDMARK}
           </span>
-          {/* cursor flashlight */}
+          {/* cursor flashlight — --mx/--my/--lit set imperatively on pointer move */}
           <span
-            className="absolute inset-x-0 top-0 block bg-clip-text text-transparent transition-opacity duration-300"
-            style={{
-              opacity: "var(--lit, 0)" as unknown as number,
-              backgroundImage:
-                "radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), var(--accent), transparent 70%)",
-            }}
+            className="absolute inset-x-0 top-0 block bg-clip-text text-transparent transition-opacity duration-300 [background-image:radial-gradient(240px_circle_at_var(--mx,50%)_var(--my,50%),var(--accent),transparent_70%)]"
+            style={{ opacity: "var(--lit, 0)" as unknown as number }}
           >
             {WORDMARK}
           </span>

@@ -202,15 +202,15 @@ export default function ThirdSection() {
   const label =
     "absolute left-5 top-4 z-10 font-serif text-[11px] uppercase tracking-[0.2em] transition-colors duration-500 sm:text-xs";
 
-  /* ---------------------------------------------------------------- */
+/* ---------------------------------------------------------------- */
   return (
     <section
       ref={sectionRef}
       id="artists"
       aria-label="Enthusiastic artists"
-       className="relative h-[200vh] bg-nav-left text-nav-left-fg transition-colors duration-500"
+      className="relative h-[200vh] bg-nav-left text-nav-left-fg transition-colors duration-500"
     >
-      <div className="sticky top-16 sm:top-19 h-screen w-full overflow-hidden">
+      <div className="sticky top-16 h-screen w-full overflow-hidden sm:top-19">
         {/* lighter glow in the middle */}
         <div
           aria-hidden
@@ -237,7 +237,6 @@ export default function ThirdSection() {
             tileRefs.current[0] = el;
           }}
           className={`${tile} z-[1] bg-nav-overlay text-nav-right-heading`}
-          style={{ left: 0, top: 0, width: "50%", height: "50%" }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -267,7 +266,6 @@ export default function ThirdSection() {
           }}
           onPointerEnter={enter}
           className={`${tile} z-[1] bg-accent text-accent-fg`}
-          style={{ left: "50%", top: 0, width: "50%", height: "50%" }}
         >
           <div className="absolute inset-0 flex items-end p-6 sm:p-10">
             <p className="font-serif text-[clamp(1.6rem,4vw,3.6rem)] font-semibold uppercase leading-[0.95]">
@@ -297,7 +295,6 @@ export default function ThirdSection() {
           }}
           onPointerEnter={enter}
           className={`${tile} z-[1] bg-nav-left text-nav-left-fg`}
-          style={{ left: 0, top: "50%", width: "50%", height: "50%" }}
         >
           <div className="absolute inset-0 flex items-end p-6 sm:p-10">
             <p className="font-serif text-[clamp(1.6rem,4vw,3.6rem)] font-semibold uppercase leading-[0.95]">
@@ -326,7 +323,6 @@ export default function ThirdSection() {
             tileRefs.current[3] = el;
           }}
           className={`${tile} z-[3] bg-foreground text-background`}
-          style={{ left: "50%", top: "50%", width: "50%", height: "50%" }}
         >
           <span
             aria-hidden

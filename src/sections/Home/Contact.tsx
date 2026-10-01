@@ -287,6 +287,16 @@ export default function Contact() {
     return () => io.disconnect();
   }, []);
 
+  /* scroll to contact section if hash is present */
+  useEffect(() => {
+    if (window.location.hash === "#contact") {
+      const el = sectionRef.current;
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, []);
+
   /* scroll + mouse parallax (one rAF loop, smoothed) */
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -417,7 +427,7 @@ export default function Contact() {
     },
   ];
 
-  /* ---------------------------------------------------------------- */
+/* ---------------------------------------------------------------- */
   return (
     <section
       ref={sectionRef}
@@ -466,7 +476,7 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* rising embers + twinkling stars */}
+      {/* rising embers — positions/sizes/timings come from EMBERS array */}
       {EMBERS.map(([l, dur, del, sz, dx], i) => (
         <span
           key={`e${i}`}
@@ -484,6 +494,8 @@ export default function Contact() {
           }
         />
       ))}
+
+      {/* twinkling stars — positions/sizes/timings come from STARS array */}
       {STARS.map(([l, t, d, sz], i) => (
         <span
           key={`s${i}`}
@@ -500,12 +512,9 @@ export default function Contact() {
         className="pointer-events-none absolute bottom-0 left-0 z-[1] hidden will-change-transform md:block"
       >
         <div
-          className="relative"
-          style={{
-            opacity: inView ? 1 : 0,
-            transform: inView ? "translateX(0)" : "translateX(-80px)",
-            transition: `opacity 1s ease-out 0.4s, transform 1.2s ${EASE} 0.4s`,
-          }}
+          className={`relative transition-[opacity,transform] duration-[1000ms,1200ms] ease-out delay-[400ms] ${
+            inView ? "translate-x-0 opacity-100" : "-translate-x-[80px] opacity-0"
+          }`}
         >
           <div className="ct-pulse absolute left-1/2 top-1/3 h-[70%] w-[90%] -translate-x-1/2 rounded-full bg-cyan-400/25 blur-3xl" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -524,12 +533,9 @@ export default function Contact() {
         className="pointer-events-none absolute bottom-0 right-0 z-[1] hidden will-change-transform md:block"
       >
         <div
-          className="relative"
-          style={{
-            opacity: inView ? 1 : 0,
-            transform: inView ? "translateX(0)" : "translateX(80px)",
-            transition: `opacity 1s ease-out 0.55s, transform 1.2s ${EASE} 0.55s`,
-          }}
+          className={`relative transition-[opacity,transform] duration-[1000ms,1200ms] ease-out delay-[550ms] ${
+            inView ? "translate-x-0 opacity-100" : "translate-x-[80px] opacity-0"
+          }`}
         >
           <div className="ct-pulse absolute left-1/2 top-1/3 h-[70%] w-[90%] -translate-x-1/2 rounded-full bg-red-500/25 blur-3xl" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -549,8 +555,7 @@ export default function Contact() {
           <span
             ref={cRef}
             aria-hidden
-            className="pointer-events-none absolute left-1/2 top-1/2 select-none font-serif text-[9rem] leading-none text-nav-right-heading/10 sm:text-[13rem]"
-            style={{ transform: "translate(-50%, -50%)" }}
+            className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none font-serif text-[9rem] leading-none text-nav-right-heading/10 sm:text-[13rem]"
           >
             C
           </span>
@@ -573,21 +578,16 @@ export default function Contact() {
             {words.map((w, i) => (
               <span key={i} aria-hidden className="inline-block overflow-hidden py-1 pr-[0.28em] align-bottom">
                 <span
-                  className="block"
-                  style={{
-                    transform: inView ? "translateY(0)" : "translateY(115%)",
-                    transition: `transform 1s ${EASE}`,
-                    transitionDelay: inView ? `${0.15 + i * 0.07}s` : "0s",
-                  }}
+                  className={`block transition-transform duration-1000 ease-[cubic-bezier(0.77,0,0.175,1)] ${
+                    inView ? "translate-y-0" : "translate-y-[115%]"
+                  }`}
+                  style={{ transitionDelay: inView ? `${0.15 + i * 0.07}s` : "0s" }}
                 >
                   {w}
                 </span>
               </span>
             ))}
           </h2>
-
-     
-
         </header>
 
         {/* Grid: info + form */}
@@ -675,14 +675,10 @@ export default function Contact() {
                 shake ? "ct-shake" : ""
               }`}
             >
-              {/* cursor spotlight */}
+              {/* cursor spotlight — uses --mx/--my set imperatively */}
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-0 opacity-70"
-                style={{
-                  background:
-                    "radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--accent) 16%, transparent), transparent 60%)",
-                }}
+                className="pointer-events-none absolute inset-0 opacity-70 [background:radial-gradient(420px_circle_at_var(--mx,50%)_var(--my,0%),color-mix(in_srgb,var(--accent)_16%,transparent),transparent_60%)]"
               />
               {/* accent corner brackets */}
               {[
@@ -825,8 +821,7 @@ export default function Contact() {
                         <>
                           <span
                             aria-hidden
-                            className="h-4 w-4 rounded-full border-2 border-accent-fg/30 border-t-accent-fg"
-                            style={{ animation: "ctSpinner 0.7s linear infinite" }}
+                            className="h-4 w-4 rounded-full border-2 border-accent-fg/30 border-t-accent-fg animate-[ctSpinner_0.7s_linear_infinite]"
                           />
                           <span className="relative z-10">Sending</span>
                         </>

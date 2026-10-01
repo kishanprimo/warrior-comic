@@ -9,13 +9,13 @@ const LOGO_LOCAL = "/Images/Imgs/Logo.png";
 const LOGO_REMOTE = "/Images/Imgs/Logo.png";
 
 const NAV_LINKS = [
-  { label: "Home", href: "/", num: "一", word: "家" },
-  { label: "Character", href: "/character", num: "二", word: "英雄" },
-  { label: "Comics", href: "/comics", num: "三", word: "漫画" },
-  { label: "Videos", href: "/videos", num: "四", word: "映像" },
-  { label: "Blogs", href: "/blog", num: "五", word: "記事" },
-  { label: "Login", href: "/login", num: "六", word: "入" },
-  { label: "Signup", href: "/signup", num: "七", word: "登録" },
+  { label: "Home", href: "/", num: "一", word: "1" },
+  { label: "Character", href: "/character", num: "一", word: "2" },
+  { label: "Comics", href: "/comics", num: "一", word: "3" },
+  { label: "Videos", href: "/videos", num: "一", word: "4" },
+  { label: "Blogs", href: "/blog", num: "一", word: "5" },
+  { label: "FAQ", href: "/faq", num: "一", word: "5" },
+  // { label: "News", href: "/news", num: "一", word: "6" },
 ];
 
 const SOCIALS = [
@@ -27,8 +27,8 @@ const SOCIALS = [
 ];
 
 const LEGAL = [
-  { label: "Terms & Conditions", href: "#" },
-  { label: "Privacy Policy", href: "#" },
+  { label: "Terms & Conditions", href: "/terms" },
+  { label: "Privacy Policy", href: "/privacy" },
 ];
 
 const EASE_CLASS = "ease-[cubic-bezier(0.77,0,0.175,1)]";
@@ -77,7 +77,7 @@ export default function Navbar() {
           <Link
             href="/"
             aria-label="Warrior Comics home"
-            className="flex items-center animate-wc-nav-fade wc-delay-intro"
+            className="flex items-center"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -90,11 +90,11 @@ export default function Navbar() {
             />
           </Link>
 
-          <span className="absolute left-1/2 hidden -translate-x-1/2 text-xs sm:text-sm tracking-[0.3em] sm:block animate-wc-nav-fade wc-delay-intro-1">
+          <span className="absolute left-1/2 hidden -translate-x-1/2 text-xs sm:text-sm tracking-[0.3em] sm:block">
             WC-Universe
           </span>
 
-          <div className="flex items-center gap-2 sm:gap-3 cursor-pointer animate-wc-nav-fade wc-delay-intro-2">
+          <div className="flex items-center gap-2 sm:gap-3 cursor-pointer">
             <ThemeToggle />
             <button
               type="button"
@@ -111,7 +111,7 @@ export default function Navbar() {
 
           <span
             aria-hidden
-            className={`absolute bottom-0 left-0 h-px w-full origin-left animate-wc-nav-line wc-delay-intro ${
+            className={`absolute bottom-0 left-0 h-px w-full origin-left ${
               !open ? "bg-[#f5efe6]/20" : "bg-header-line"
             }`}
           />
@@ -180,9 +180,9 @@ export default function Navbar() {
                     <span className="relative z-10 flex w-full items-center gap-2 sm:gap-3">
                       {/* LEFT GROUP: (1) + TITLE — kept on the same line */}
                       <span className="flex min-w-0 flex-1 items-baseline gap-1.5 sm:gap-2 transition-transform duration-500 ease-out group-hover:translate-x-2 md:group-hover:translate-x-4">
-                        <sup className="shrink-0 font-serif text-[10px] leading-none sm:text-xs md:text-sm">
+                        {/* <sup className="shrink-0 font-serif text-[10px] leading-none sm:text-xs md:text-sm">
                           ({i + 1})
-                        </sup>
+                        </sup> */}
                         <span className="block min-w-0 overflow-hidden py-1 pr-2">
                           <span
                             className={`block whitespace-nowrap font-serif text-[clamp(1.1rem,5vw,3.75rem)] uppercase leading-none tracking-wide transition-transform duration-[900ms] ${EASE_CLASS} ${
@@ -208,7 +208,7 @@ export default function Navbar() {
                           <span className="font-serif text-xs transition-opacity duration-300 group-hover:opacity-0 sm:text-sm md:text-lg">
                             {link.num}
                           </span>
-                          <span className="absolute whitespace-nowrap font-serif text-xs text-nav-left-fg opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:text-sm md:text-lg">
+                          <span className="absolute whitespace-nowrap font-serif text-xs text-nav-left-fg text-4xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:text-sm md:text-lg">
                             {link.word}
                           </span>
                         </span>

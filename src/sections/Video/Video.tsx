@@ -446,11 +446,18 @@ export default function Video() {
           className="m-0 mt-5 font-serif text-[clamp(1.9rem,5vw,3.8rem)] font-bold leading-[1.08] tracking-tight"
         >
           Stories brought to life by{" "}
-          <span className="font-light italic text-accent">artists worldwide</span> 
+          <span className="font-light italic text-accent">artists worldwide</span>
         </motion.h2>
-          <span className="text-gray-500 font-normal text-sm tracking-wide -mt-4">
-            ( Drag and rotate to explore th 3D gallery from all sides )
-            </span>
+
+        <motion.span
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.7, delay: 0.25 }}
+          className="mt-4 block text-sm font-normal tracking-wide text-gray-500"
+        >
+          ( Drag and rotate to explore th 3D gallery from all sides )
+        </motion.span>
 
         {/* <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -474,10 +481,10 @@ export default function Video() {
         onPointerLeave={onUp}
         className="relative h-[72svh] min-h-[460px] w-full cursor-grab touch-pan-y select-none active:cursor-grabbing md:h-[88vh] md:min-h-[620px]"
       >
-        {/* 3D canvas */}
+        {/* 3D canvas — opacity flips once `ready` becomes true */}
         <div
-          className="absolute inset-0"
-          style={{ opacity: ready ? 1 : 0, transition: "opacity 0.9s ease-out" }}
+          className={`absolute inset-0 transition-opacity duration-[900ms] ease-out ${ready ? "opacity-100" : "opacity-0"
+            }`}
         >
           <Canvas
             frameloop={inView ? "always" : "never"}
@@ -501,7 +508,7 @@ export default function Video() {
           </div>
         )}
 
-               {/* centre heading */}
+        {/* centre heading */}
         <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-4 text-center">
           <h3 className="m-0 font-serif text-2xl font-normal leading-tight tracking-tight text-white drop-shadow-xl sm:text-4xl ">
             Made with <br />
@@ -562,8 +569,6 @@ export default function Video() {
           aria-hidden
           className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"
         />
-
-     
       </div>
 
       {/* keyboard / screen-reader access to the same links */}

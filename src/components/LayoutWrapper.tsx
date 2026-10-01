@@ -9,7 +9,7 @@ import BottomToTop from "@/components/Bottomtotop";
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Loader />
+      {/* <Loader /> */}
       <Navbar />
       {children}
       <Footer />
