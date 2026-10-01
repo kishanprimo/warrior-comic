@@ -15,7 +15,7 @@ const VIDEO = {
 };
 
 // The two slides that sit next to the video on the original site
-const SLIDES = ["/Images/Imgs/1.jpg", "/Images/Imgs/2.jpg"];
+const SLIDES = ["/images/Imgs/1.jpg", "/images/Imgs/2.jpg"];
 // Real blog posts from the site
 const STORIES = [
   {

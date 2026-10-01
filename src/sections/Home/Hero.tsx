@@ -5,8 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 /* ------------------------------------------------------------------ */
 /* Content (from warriorcomics.com)                                    */
 /* ------------------------------------------------------------------ */
-const BASE = "/wc-content/Images";
-const AVATAR = "/Images/Avtar/avtarman1.png";
+const AVATAR = "/images/Avtar/avtarman1.png";
 
 const TITLE = "WC-UNIVERSE";
 const SUBTITLE = "Let's create another world";
@@ -14,10 +13,10 @@ const PARAGRAPH =
   "Warrior Comics is home to enthusiastic artists and creative, entertaining stories. Step into the WC-Universe and meet Avatarman, Merlyn, Petra, Ange Apollo, Doctor Handel Von Neumann and Sentor.";
 
 const COMICS = [
-  { src: "/Images/Imgs/comic-1.jpg", caption: "Warrior Comics" },
-  { src: "/Images/Imgs/comic-2.jpg", caption: "Coming soon" },
-  { src: "/Images/Imgs/comic-3.jpg", caption: "Coming soon" },
-  { src: "/Images/Imgs/comic-4.jpg", caption: "A doctor in his early thirties" },
+  { src: "/images/Imgs/comic-1.jpg", caption: "Warrior Comics" },
+  { src: "/images/Imgs/comic-2.jpg", caption: "Coming soon" },
+  { src: "/images/Imgs/comic-3.jpg", caption: "Coming soon" },
+  { src: "/images/Imgs/comic-4.jpg", caption: "A doctor in his early thirties" },
 ];
 
 // Vertical "curtain" strips (relative widths) that slide in from the right

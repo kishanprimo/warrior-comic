@@ -11,8 +11,8 @@ import React, {
 } from "react";
 
 /* ---------------- Content ---------------- */
-const AVATAR_BASE = "/Images/Avtar";
-const LOGO_BASE = "/Images/Imgs";        // WC logo lives with the other site logos
+const AVATAR_BASE = "/images/Avtar";
+const LOGO_BASE = "/images/Imgs";        // WC logo lives with the other site logos
 const LOGO = `${LOGO_BASE}/Logo.png`;
 const IMG = {
   avatarman: `${AVATAR_BASE}/avtarman1.png`,   // no dash
@@ -28,9 +28,9 @@ const ICO_HREF = "https://warriortoken.com/";
 const BG_EXT = "png";
 type Scene = { src: string; rot: number };
 const WAR_SCENES: Scene[] = [
-  { src: `/Images/Imgs/bg1.${BG_EXT}`, rot: 0 },
-  { src: `/Images/Imgs/bg2.${BG_EXT}`, rot: 0 },
-  { src: `/Images/Imgs/bg3.${BG_EXT}`, rot: 0 },
+  { src: `/images/Imgs/bg1.${BG_EXT}`, rot: 0 },
+  { src: `/images/Imgs/bg2.${BG_EXT}`, rot: 0 },
+  { src: `/images/Imgs/bg3.${BG_EXT}`, rot: 0 },
 ];
 
 /* ---------------- Geometry / motion ---------------- */

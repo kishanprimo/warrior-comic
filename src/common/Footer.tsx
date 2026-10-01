@@ -6,8 +6,8 @@ import Link from "next/link";
 /* ------------------------------------------------------------------ */
 /* Content (from warriorcomics.com)                                    */
 /* ------------------------------------------------------------------ */
-const BASE = "/wc-content/Images";
-const LOGO = `${BASE}/Warrior-Comics-logo-3.png`;
+const BASE = "/images/Imgs";
+const LOGO = `${BASE}/Logo.png`;
 const TOKEN_LOGO = `${BASE}/warrior-token-logo.png`;
 
 const ICO_HREF = "https://warriortoken.com/";

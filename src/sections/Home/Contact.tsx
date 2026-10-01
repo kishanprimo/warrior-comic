@@ -5,8 +5,8 @@ import React, { useEffect, useRef, useState } from "react";
 /* ------------------------------------------------------------------ */
 /* Content (from warriorcomics.com)                                    */
 /* ------------------------------------------------------------------ */
-const AVATAR_BASE = "/Images/Avtar";
-const BG_IMG = `${AVATAR_BASE}/artist.jpg`;        // artist.jpg not in the list — see note below
+const AVATAR_BASE = "/images/Avtar";
+const BG_IMG = "/images/Imgs/warriorartist.jpg";
 const HERO_L = `${AVATAR_BASE}/avtarman1.png`;
 const HERO_R = `${AVATAR_BASE}/sentor-1.png`;
 

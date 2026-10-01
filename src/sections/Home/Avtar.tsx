@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
-const BASE = "/wc-content/Images";
+const BASE = "/images/Avtar";
 
 type Card = { name: string; text: string; href: string };
 type Slide = {
