@@ -446,8 +446,11 @@ export default function Video() {
           className="m-0 mt-5 font-serif text-[clamp(1.9rem,5vw,3.8rem)] font-bold leading-[1.08] tracking-tight"
         >
           Stories brought to life by{" "}
-          <span className="font-light italic text-accent">artists worldwide</span>
+          <span className="font-light italic text-accent">artists worldwide</span> 
         </motion.h2>
+          <span className="text-gray-500 font-normal text-sm tracking-wide -mt-4">
+            ( Drag and rotate to explore th 3D gallery from all sides )
+            </span>
 
         {/* <motion.p
           initial={{ opacity: 0, y: 20 }}
