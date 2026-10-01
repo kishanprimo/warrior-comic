@@ -5,8 +5,8 @@ import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
 
 // Logo: local file first, falls back to the Warrior Comics URL if the local file is missing.
-const LOGO_LOCAL = "/wc-content/Images/Warrior-Comics-logo-3.png";
-const LOGO_REMOTE = "/wc-content/Images/Warrior-Comics-logo-3.png";
+const LOGO_LOCAL = "/Images/Imgs/Logo.png";
+const LOGO_REMOTE = "/Images/Imgs/Logo.png";
 
 const NAV_LINKS = [
   { label: "Home", href: "/", num: "一", word: "家" },
