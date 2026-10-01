@@ -6,7 +6,7 @@ import Link from "next/link";
 /* ------------------------------------------------------------------ */
 /* Content                                                             */
 /* ------------------------------------------------------------------ */
-const BASE = "/Images/Imgs";
+const BASE = "/images/Imgs";
 const LOGO = `${BASE}/Logo.png`;
 const TOKEN_LOGO = `${BASE}/warrior-token-logo.png`;
 

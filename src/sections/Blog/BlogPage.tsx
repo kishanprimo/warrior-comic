@@ -29,7 +29,7 @@ const BLOG_ITEMS: BlogCardItem[] = [
         number: "NO. 01",
         badge: "BEHIND THE ART",
         badgeBg: "bg-[#ff3b30]",
-        image: "/Images/Imgs/blog-1.jpg",
+        image: "/images/Imgs/blog-1.jpg",
         title: "FINALLY, SOMEONE COMES UP WITH END OF PIRACY!",
         description:
             "Illegal hosting of content is a massive challenge in the comic industry. Discover how Warrior Comics is building a revolutionary decentralized protection for comic creators.",
@@ -47,7 +47,7 @@ const BLOG_ITEMS: BlogCardItem[] = [
         number: "NO. 02",
         badge: "CHARACTERS",
         badgeBg: "bg-[#0099ff]",
-        image: "/Images/Imgs/blog-2.jpg",
+        image: "/images/Imgs/blog-2.jpg",
         title: "WARRIOR COMICS IS A WAY OUT IN THIS ILLEGAL WORLD",
         description:
             "Reading newspaper is frustrating when encountering ongoing internet scams. Uncover how our decentralized vault provides absolute security for artists and collectors.",
@@ -65,7 +65,7 @@ const BLOG_ITEMS: BlogCardItem[] = [
         number: "NO. 03",
         badge: "STORY",
         badgeBg: "bg-[#00cc66]",
-        image: "/Images/Imgs/blog-3.jpg",
+        image: "/images/Imgs/blog-3.jpg",
         title: "MONETIZE YOUR COMIC ART GLOBALLY",
         description:
             "When we talk about creativity, webcomics are the bold new frontier. Empowering global comic artists with transparent royalties and worldwide fan distribution.",
@@ -83,7 +83,7 @@ const BLOG_ITEMS: BlogCardItem[] = [
         number: "NO. 04",
         badge: "INTERVIEWS",
         badgeBg: "bg-[#f59e0b]",
-        image: "/Images/Imgs/blog-4.jpg",
+        image: "/images/Imgs/blog-4.jpg",
         title: "JOIN US AT OLD AGE HOME & COMMUNITY SESSIONS",
         description:
             "Warrior Comics team is continuously contributing to society. Bringing bright memories, creative workshops, and inspiring storytelling to local communities.",

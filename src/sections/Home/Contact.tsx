@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 /* ------------------------------------------------------------------ */
 /* Content                                                             */
 /* ------------------------------------------------------------------ */
-const AVATAR_BASE = "/Images/Avtar";
+const AVATAR_BASE = "/images/Avtar";
 const BG_IMG = `${AVATAR_BASE}/artist.jpg`;
 const HERO_L = `${AVATAR_BASE}/avtarman1.png`;
 const HERO_R = `${AVATAR_BASE}/sentor-1.png`;

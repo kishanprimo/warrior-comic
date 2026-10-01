@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 /* ------------------------------------------------------------------ */
 /* Content (from warriorcomics.com)                                    */
 /* ------------------------------------------------------------------ */
-const LOGO = "/Images/Imgs/warrior-token-logo.png";
+const LOGO = "/images/Imgs/warrior-token-logo.png";
 const HEADING = "ICO presale will start soon";
 const BODY =
   "We would like to invite you all to participate in the Warrior Token sale. With your support we will be able to raise fund for this revolutionary platform. We will continue to share the updates of the project here and on our communities. Stay tuned!";

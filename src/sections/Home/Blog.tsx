@@ -9,22 +9,22 @@ type Post = { img: string; title: string; href: string };
 
 const POSTS: Post[] = [
   {
-    img: "/Images/Imgs/blog-1.jpg",
+    img: "/images/Imgs/blog-1.jpg",
     title: "Finally, someone comes up with end of piracy!",
     href: "https://www.reddit.com/user/WarriorComics/comments/a5gmri/finally_someone_comes_up_with_end_of_piracy/",
   },
   {
-    img: "/Images/Imgs/blog-2.jpg",
+    img: "/images/Imgs/blog-2.jpg",
     title: "Warrior Comics is a way out in this illegal internet world",
     href: "https://www.reddit.com/user/WarriorComics/comments/a5gmri/finally_someone_comes_up_with_end_of_piracy/",
   },
   {
-    img: "/Images/Imgs/blog-3.jpg",
+    img: "/images/Imgs/blog-3.jpg",
     title: "Monetize your comic art globally",
     href: "https://www.reddit.com/r/comics/comments/a5gre1/monetize_your_art_globally/",
   },
   {
-    img: "/Images/Imgs/blog-4.jpg",
+    img: "/images/Imgs/blog-4.jpg",
     title: "Join us at old age home next Sunday",
     href: "https://www.reddit.com/r/comics/comments/a5gre1/monetize_your_art_globally/",
   },

@@ -2,7 +2,7 @@
    Images are the same character art used in Avtar.tsx (Avatarman uses the
    hero image). Edit text / order / side / tone / fire here — the layout follows. */
 
-const BASE = "/Images/Avtar";
+const BASE = "/images/Avtar";
 
 /* Background artwork, one per chapter (cycles if there are more chapters).
    They are blended with the chapter colour so they follow the theme. */
