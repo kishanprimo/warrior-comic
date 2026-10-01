@@ -132,7 +132,7 @@ export default function AuthUI() {
     <section
       ref={sectionRef}
       id="faq-universe"
-      className="relative isolate min-h-screen overflow-hidden bg-[color-mix(in_oklab,var(--nav-overlay-bg)_30%,#000)] font-sans text-nav-right-heading"
+      className="relative isolate min-h-screen overflow-hidden bg-background font-sans text-foreground transition-colors duration-500"
     >
       <style>{CSS}</style>
 
@@ -141,18 +141,18 @@ export default function AuthUI() {
       ============================================================ */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         {/* colour wash */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_25%_15%,rgba(255,110,0,0.14),transparent_55%),radial-gradient(ellipse_at_85%_85%,rgba(34,211,238,0.12),transparent_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_25%_15%,color-mix(in_srgb,var(--accent)_14%,transparent),transparent_55%),radial-gradient(ellipse_at_85%_85%,color-mix(in_srgb,var(--nav-left-band)_16%,transparent),transparent_55%)]" />
 
         {/* mouse spotlight */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(520px circle at calc(50% + var(--mx) * 38%) calc(50% + var(--my) * 38%), rgba(255,170,90,0.12), transparent 65%)",
+              "radial-gradient(520px circle at calc(50% + var(--mx) * 38%) calc(50% + var(--my) * 38%), color-mix(in srgb, var(--accent) 12%, transparent), transparent 65%)",
           }}
         />
 
-        {/* manga speed lines — rotate with scroll + constantly */}
+        {/* manga speed lines */}
         <div
           className={`absolute left-1/2 top-1/2 h-[150vmax] w-[150vmax] transition-opacity duration-1000 will-change-transform ${
             entered ? "opacity-0" : "opacity-55"
@@ -163,7 +163,7 @@ export default function AuthUI() {
             className="ct-spin h-full w-full"
             style={{
               background:
-                "repeating-conic-gradient(from 0deg, rgba(255,255,255,0.08) 0deg 0.9deg, transparent 0.9deg 6deg)",
+                "repeating-conic-gradient(from 0deg, color-mix(in srgb, var(--foreground) 8%, transparent) 0deg 0.9deg, transparent 0.9deg 6deg)",
               ...maskStyle("radial-gradient(closest-side, transparent 6%, #000 30%, transparent 100%)"),
             }}
           />
@@ -180,7 +180,7 @@ export default function AuthUI() {
           className="absolute -right-[8%] bottom-[10%] will-change-transform"
           style={{ transform: "translate3d(calc(var(--mx) * 30px), calc((0.5 - var(--p)) * -180px), 0)" }}
         >
-          <div className="ct-orb h-[42vmin] w-[42vmin] rounded-full bg-cyan-400/15 blur-3xl [animation-delay:-8s]" />
+          <div className="ct-orb h-[42vmin] w-[42vmin] rounded-full bg-[color-mix(in_srgb,var(--nav-left-band)_22%,transparent)] blur-3xl [animation-delay:-8s]" />
         </div>
 
         {/* neon perspective grid floor */}
@@ -193,7 +193,7 @@ export default function AuthUI() {
             style={{
               transform: entered ? "none" : "perspective(520px) rotateX(63deg)",
               backgroundImage:
-                "linear-gradient(rgba(255,140,60,0.45) 1px, transparent 1px), linear-gradient(90deg, rgba(255,140,60,0.45) 1px, transparent 1px)",
+                "linear-gradient(color-mix(in srgb, var(--accent) 45%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--accent) 45%, transparent) 1px, transparent 1px)",
               backgroundSize: "60px 60px",
             }}
           />
@@ -201,26 +201,31 @@ export default function AuthUI() {
 
         {/* comic halftone dots + vignette */}
         <div className="absolute inset-0 opacity-30 [background-image:radial-gradient(var(--nav-right-line)_1px,transparent_1.6px)] [background-size:18px_18px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,transparent_20%,rgba(0,0,0,0.85)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,transparent_20%,color-mix(in_srgb,var(--background)_85%,transparent)_100%)]" />
 
         {/* embers + stars */}
         {EMBERS.map(([l, dur, del, sz, dx], i) => (
           <span
             key={`e${i}`}
-            className="ct-rise absolute bottom-0 rounded-full bg-orange-400 shadow-[0_0_8px_2px_rgba(251,146,60,0.7)]"
+            className="ct-rise absolute bottom-0 rounded-full bg-[color-mix(in_srgb,var(--accent)_80%,#ff7a30)] shadow-[0_0_8px_2px_color-mix(in_srgb,var(--accent)_70%,transparent)]"
             style={{ left: `${l}%`, width: sz, height: sz, animationDuration: `${dur}s`, animationDelay: `${del}s`, ["--dx" as string]: `${dx}px` }}
           />
         ))}
         {STARS.map(([l, t, d, sz], i) => (
           <span
             key={`s${i}`}
-            className="ct-twinkle absolute rounded-full bg-nav-right-heading"
+            className="ct-twinkle absolute rounded-full bg-foreground"
             style={{ left: `${l}%`, top: `${t}%`, width: sz, height: sz, animationDelay: `${d}s` }}
           />
         ))}
 
         {/* flash when entering */}
-        {burst > 0 && <span key={`flash${burst}`} className="ct-flash absolute inset-0 bg-orange-200" />}
+        {burst > 0 && (
+          <span
+            key={`flash${burst}`}
+            className="ct-flash absolute inset-0 bg-[color-mix(in_srgb,var(--accent)_35%,transparent)]"
+          />
+        )}
       </div>
 
       {/* ============================================================
@@ -236,12 +241,12 @@ export default function AuthUI() {
           >
             <Emblem entered={entered} burst={burst} />
 
-            <p className="mt-6 text-[10px] font-bold uppercase tracking-[0.45em] text-orange-200/90 sm:text-xs">
+            <p className="mt-6 text-[10px] font-bold uppercase tracking-[0.45em] text-accent/90 sm:text-xs">
               ✦ Warrior Comics • Help Center ✦
             </p>
 
             <h2
-              className={`mt-3 font-serif font-black uppercase leading-none text-white drop-shadow-[0_6px_30px_rgba(255,120,40,0.5)] transition-all duration-1000 ease-out ${
+              className={`mt-3 font-serif font-black uppercase leading-none text-foreground drop-shadow-[0_6px_30px_color-mix(in_srgb,var(--accent)_50%,transparent)] transition-all duration-1000 ease-out ${
                 entered
                   ? "text-[clamp(1.9rem,3.6vw,3.2rem)] tracking-[0.14em]"
                   : "text-[clamp(2.4rem,9vw,7rem)] tracking-[0.18em]"
@@ -249,7 +254,7 @@ export default function AuthUI() {
             >
               Warrior
               <span
-                className={`block font-light text-orange-100/90 transition-all duration-1000 ease-out ${
+                className={`block font-light text-foreground/80 transition-all duration-1000 ease-out ${
                   entered ? "mt-1 text-[0.5em] tracking-[0.4em]" : "mt-2 text-[0.42em] tracking-[0.55em]"
                 }`}
               >
@@ -259,15 +264,15 @@ export default function AuthUI() {
 
             {/* BEFORE: tagline + CTA */}
             <Collapse open={!entered}>
-              <p className="mx-auto mt-6 max-w-md text-xs font-semibold uppercase tracking-[0.3em] text-white/70 sm:text-sm">
+              <p className="mx-auto mt-6 max-w-md text-xs font-semibold uppercase tracking-[0.3em] text-foreground/70 sm:text-sm">
                 Every question has an answer. Step inside.
               </p>
               <button
                 type="button"
                 onClick={enter}
-                className="group relative mt-9 cursor-pointer inline-flex items-center gap-3 overflow-hidden rounded-full border border-accent/70 bg-accent/10 px-9 py-4 font-serif text-xs font-extrabold uppercase tracking-[0.3em] text-white backdrop-blur-sm transition-all duration-300 hover:bg-accent hover:text-accent-fg hover:shadow-[0_0_40px_var(--accent)] active:scale-95"
+                className="group relative mt-9 inline-flex cursor-pointer items-center gap-3 overflow-hidden rounded-full border border-accent/70 bg-accent/10 px-9 py-4 font-serif text-xs font-extrabold uppercase tracking-[0.3em] text-foreground backdrop-blur-sm transition-all duration-300 hover:bg-accent hover:text-accent-fg hover:shadow-[0_0_40px_var(--accent)] active:scale-95"
               >
-                <span aria-hidden className="ct-shine absolute inset-y-0 left-0 w-1/4 bg-white/25" />
+                <span aria-hidden className="ct-shine absolute inset-y-0 left-0 w-1/4 bg-foreground/20" />
                 <span className="relative z-10">Check for Support</span>
                 <svg
                   aria-hidden
@@ -280,28 +285,27 @@ export default function AuthUI() {
                   <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
-              
             </Collapse>
 
             {/* AFTER: description + support card */}
             <Collapse open={entered} delay={500}>
-              <p className="mx-auto mt-5 max-w-sm text-sm leading-relaxed text-nav-right-text/85">
+              <p className="mx-auto mt-5 max-w-sm text-sm leading-relaxed text-foreground/80">
                 Browse answers by topic or search for exactly what you need. Everything about your account,
                 comics and payments lives here.
               </p>
 
-              <div className="relative mx-auto mt-7 w-full max-w-sm overflow-hidden rounded-2xl border border-nav-right-line/80 bg-black/45 p-5 text-left backdrop-blur-xl">
+              <div className="relative mx-auto mt-7 w-full max-w-sm overflow-hidden rounded-2xl border border-foreground/15 bg-foreground/5 p-5 text-left backdrop-blur-xl">
                 <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px overflow-hidden">
                   <span className="ct-scan block h-full w-1/3 bg-gradient-to-r from-transparent via-accent to-transparent" />
                 </span>
                 <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-accent">Still have questions?</p>
-                <p className="mt-1.5 text-xs leading-relaxed text-nav-right-text/80">
+                <p className="mt-1.5 text-xs leading-relaxed text-foreground/75">
                   Can&apos;t find what you need? Our team is happy to help.
                 </p>
                 <button
                   type="button"
                   onClick={() => router.push("/#contact")}
-                  className="group mt-4 cursor-pointer inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2.5 font-serif text-[11px] font-extrabold uppercase tracking-[0.2em] text-accent-fg transition-all duration-300 hover:shadow-[0_0_24px_rgba(255,100,0,0.5)] active:scale-95"
+                  className="group mt-4 inline-flex cursor-pointer items-center gap-2 rounded-lg bg-accent px-4 py-2.5 font-serif text-[11px] font-extrabold uppercase tracking-[0.2em] text-accent-fg transition-all duration-300 hover:shadow-[0_0_24px_color-mix(in_srgb,var(--accent)_60%,transparent)] active:scale-95"
                 >
                   Contact Support
                   <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -311,7 +315,7 @@ export default function AuthUI() {
               <button
                 type="button"
                 onClick={() => setEntered(false)}
-                className="mt-6 text-[11px] font-bold uppercase tracking-[0.25em] text-nav-right-text/60 transition-colors hover:text-accent hover:underline cursor-pointer"
+                className="mt-6 cursor-pointer text-[11px] font-bold uppercase tracking-[0.25em] text-foreground/60 transition-colors hover:text-accent hover:underline"
               >
                 Back
               </button>
@@ -333,7 +337,7 @@ export default function AuthUI() {
               entered ? "translate-x-0" : "lg:translate-x-24"
             }`}
           >
-          <div className="relative h-[min(calc(100vh_-_var(--nav-h,56px)_-_5rem),760px)] overflow-hidden rounded-3xl border border-nav-right-line/80 bg-black/55 p-5 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] backdrop-blur-xl sm:p-8">
+            <div className="relative h-[min(calc(100vh_-_var(--nav-h,56px)_-_5rem),760px)] overflow-hidden rounded-3xl border border-foreground/15 bg-foreground/5 p-5 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.55)] backdrop-blur-xl sm:p-8">
               <span aria-hidden className="pointer-events-none absolute left-3 top-3 h-4 w-4 border-l-2 border-t-2 border-accent" />
               <span aria-hidden className="pointer-events-none absolute right-3 top-3 h-4 w-4 border-r-2 border-t-2 border-accent" />
               <span aria-hidden className="pointer-events-none absolute bottom-3 left-3 h-4 w-4 border-b-2 border-l-2 border-accent" />
@@ -399,20 +403,20 @@ function Emblem({ entered, burst }: { entered: boolean; burst: number }) {
 
       <div className="ct-pulse absolute inset-[10%] rounded-full bg-accent/30 blur-2xl" />
 
-      {/* outer ring — scroll + constant rotation */}
+      {/* outer ring */}
       <div className="absolute inset-0" style={{ transform: "rotate(calc(var(--p) * -220deg))" }}>
-        <div className="ct-spin-rev absolute inset-0 rounded-full border border-dashed border-nav-right-line/80">
+        <div className="ct-spin-rev absolute inset-0 rounded-full border border-dashed border-foreground/25">
           <span className="absolute left-1/2 top-0 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent shadow-[0_0_14px_3px_var(--accent)]" />
         </div>
       </div>
       <div className="absolute -inset-[8%]" style={{ transform: "rotate(calc(var(--p) * 280deg))" }}>
-        <div className="ct-spin absolute inset-0 rounded-full border border-nav-right-line/40">
-          <span className="absolute bottom-0 left-1/2 h-2 w-2 -translate-x-1/2 translate-y-1/2 rounded-full bg-cyan-300 shadow-[0_0_12px_3px_rgba(103,232,249,0.6)]" />
+        <div className="ct-spin absolute inset-0 rounded-full border border-foreground/15">
+          <span className="absolute bottom-0 left-1/2 h-2 w-2 -translate-x-1/2 translate-y-1/2 rounded-full bg-[color-mix(in_srgb,var(--nav-left-band)_80%,white)] shadow-[0_0_12px_3px_color-mix(in_srgb,var(--nav-left-band)_70%,transparent)]" />
         </div>
       </div>
 
       {/* core */}
-      <div className="absolute inset-[12%] flex items-center justify-center rounded-full border border-accent/50 bg-black/60 shadow-[inset_0_0_30px_rgba(255,110,0,0.25)] backdrop-blur-md">
+      <div className="absolute inset-[12%] flex items-center justify-center rounded-full border border-accent/50 bg-background/60 shadow-[inset_0_0_30px_color-mix(in_srgb,var(--accent)_25%,transparent)] backdrop-blur-md">
         <svg
           key={burst}
           viewBox="0 0 200 200"
@@ -429,7 +433,7 @@ function Emblem({ entered, burst }: { entered: boolean; burst: number }) {
             className={draw}
             transform="translate(35 28) scale(1.3)"
             d="M50 5 L90 20 V50 C90 75 70 90 50 97 C30 90 10 75 10 50 V20 Z"
-            fill="rgba(255,110,0,0.08)"
+            fill="color-mix(in srgb, var(--accent) 8%, transparent)"
           />
           {/* crossed swords */}
           {[-38, 38].map((rot) => (

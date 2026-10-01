@@ -69,7 +69,7 @@ export default function Navbar() {
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
           !open
-            ? "bg-[var(--background)] text-[var(--foreground)]"
+            ? "bg-background/70 backdrop-blur-md text-[var(--foreground)]"
             : "bg-transparent text-foreground"
         }`}
       >
