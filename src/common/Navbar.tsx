@@ -101,7 +101,7 @@ export default function Navbar() {
               onClick={() => setOpen(true)}
               aria-label="Open menu"
               aria-expanded={open}
-              className="group flex h-10 w-10 flex-col items-end justify-center gap-[6px] cursor-pointer"
+              className="group flex h-10 w-10 flex-col items-end justify-center gap-1.5 cursor-pointer"
             >
               <span className="h-px w-6 bg-current transition-all duration-300 group-hover:w-4" />
               <span className="h-px w-4 bg-current transition-all duration-300 group-hover:w-6" />

@@ -167,8 +167,10 @@ export default function Hero() {
       const b = easeInOut(seg(p, T.shiftA, T.shiftB));
       const out = easeInOut(seg(p, T.outA, T.outB));
 
-      if (titleRef.current) {
-        const tx = desktop ? -b * vw * 0.23 : 0;
+       if (titleRef.current) {
+        const tw = titleRef.current.offsetWidth;
+        const room = Math.max(0, (vw - tw * (1 - 0.22 * b)) / 2 - 16);
+        const tx = desktop ? -b * Math.min(vw * 0.23, room) : 0;
         const ty = desktop ? 0 : -b * vh * 0.2;
         titleRef.current.style.transform = `translate3d(${tx}px, ${
           ty - out * 50
@@ -496,7 +498,7 @@ export default function Hero() {
             <div ref={titleRef} className="text-center will-change-transform">
               <h1
                 aria-label={TITLE}
-                className="flex justify-center font-serif text-[clamp(2.8rem,11.5vw,10.5rem)] uppercase leading-none tracking-wide"
+                className="flex justify-center font-serif text-[clamp(2.2rem,8.5vw,9rem)] uppercase leading-none tracking-wide"
               >
                 {TITLE.split("").map((ch, i) => (
                   <span key={i} className="block overflow-hidden py-2" aria-hidden>

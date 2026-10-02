@@ -522,9 +522,9 @@ export default function WarriorToken() {
       >
         <div
           ref={ghostRef}
-          className="whitespace-nowrap font-serif text-[clamp(10rem,30vw,26rem)] uppercase leading-none text-transparent [-webkit-text-stroke:1px_var(--nav-right-line)] will-change-transform"
+          className="whitespace-nowrap font-serif text-[clamp(10rem,13vw,26rem)] uppercase leading-none text-transparent [-webkit-text-stroke:2px_rgba(255,255,255,0.35)] will-change-transform"
         >
-          Warrior Token Warrior Token
+          Warrior Comics Warrior Comics
         </div>
       </div>
 

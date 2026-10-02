@@ -423,7 +423,7 @@ export default function Video() {
       />
 
       {/* ============ TITLE + TAGLINE ============ */}
-      <header className="relative z-30 mx-auto max-w-4xl px-5 pb-10 pt-16 text-center sm:pb-12 sm:pt-20 md:pb-16 md:pt-24">
+      <header className="relative z-30 mx-auto max-w-4xl px-5 pb-10 pt-18  text-center sm:pb-12 sm:pt-20 md:pb-16 md:pt-24">
         <motion.span
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}

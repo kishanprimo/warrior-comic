@@ -236,7 +236,7 @@ export default function HowWeDo() {
     >
       <div
         ref={stageRef}
-        className="sticky top-16 sm:top-19 h-[calc(100vh-4rem)] sm:h-[calc(100vh-4.75rem)] w-full overflow-hidden"
+        className="sticky top-16 sm:top-19 h-[calc(100svh-4rem)] sm:h-[calc(100svh-4.75rem)] w-full overflow-hidden"
       >
         {/* lighter glow in the middle (same as third section) */}
         <div
@@ -257,7 +257,7 @@ export default function HowWeDo() {
         >
           <div
             ref={markRef}
-            className="w-max whitespace-nowrap font-serif text-[clamp(4rem,12vw,10rem)] font-bold uppercase leading-none text-transparent opacity-40 [-webkit-text-stroke:1px_var(--nav-left-line)]"
+            className="w-max whitespace-nowrap font-serif text-[clamp(4rem,12vw,10rem)] font-bold uppercase leading-none text-transparent opacity-20 sm:opacity-40 [-webkit-text-stroke:1px_var(--nav-left-line)]"
           >
             {MARQUEE.repeat(4)}
           </div>
@@ -287,7 +287,7 @@ export default function HowWeDo() {
           {/* Main area: video (left column) + content (right column) */}
           <div
             ref={mainRef}
-            className="mt-3 grid min-h-0 flex-1 grid-cols-1 items-center gap-3 sm:mt-4 lg:grid-cols-12 lg:gap-10"
+            className="mt-2 grid min-h-0 flex-1 grid-cols-1 grid-rows-[auto_minmax(0,1fr)] items-center gap-2 sm:mt-4 sm:gap-3 lg:grid-cols-12 lg:grid-rows-[minmax(0,1fr)] lg:gap-10"
           >
             {/* ===== LEFT: cinema frame ===== */}
             <div className="relative z-20 lg:col-span-7">
@@ -380,11 +380,11 @@ export default function HowWeDo() {
             </div>
 
             {/* ===== RIGHT: content that arrives on scroll ===== */}
-            <div className="relative z-10 flex min-h-0 flex-col gap-2 sm:gap-3 lg:col-span-5">
+            <div className="relative z-10 flex h-full min-h-0 flex-col gap-2 sm:gap-3 lg:col-span-5 lg:self-stretch">
               {/* slideshow (the two slides from the site) — opacity animated by JS scroll timeline */}
               <div
                 ref={setBlock(0)}
-                className="relative aspect-[21/9] w-full overflow-hidden rounded-xl border border-nav-left-line bg-nav-overlay shadow-lg will-change-transform lg:aspect-[16/7]"
+                className="relative min-h-[48px] w-full flex-[1.3] overflow-hidden rounded-xl border border-nav-left-line bg-nav-overlay shadow-lg will-change-transform max-sm:hidden"
                 style={{ opacity: 0 }}
               >
                 {SLIDES.map((src, i) => (
@@ -423,23 +423,23 @@ export default function HowWeDo() {
                 <div
                   key={s.title}
                   ref={setBlock(i + 1)}
-                  className={`will-change-transform ${i > 0 ? "hidden lg:block" : ""}`}
+                  className="min-h-0 flex-1 will-change-transform"
                   style={{ opacity: 0 }}
                 >
                   <a
                     href={s.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="group relative block overflow-hidden rounded-xl border border-nav-left-line bg-nav-overlay/30 p-3 text-inherit no-underline backdrop-blur-sm transition-all duration-300 hover:border-accent/70 hover:bg-nav-overlay/55 sm:p-4"
+                    className="group relative flex h-full flex-col justify-center overflow-hidden rounded-xl border border-nav-left-line bg-nav-overlay/30 px-3 py-1.5 text-inherit no-underline backdrop-blur-sm transition-all duration-300 hover:border-accent/70 hover:bg-nav-overlay/55 sm:px-4 sm:py-2"
                   >
                     <span
                       aria-hidden
                       className="absolute bottom-0 left-0 top-0 w-1 origin-top scale-y-0 bg-accent transition-transform duration-300 group-hover:scale-y-100"
                     />
-                    <h3 className="m-0 font-serif text-sm font-bold uppercase leading-snug tracking-[0.1em] sm:text-[15px]">
+                    <h3 className="m-0 line-clamp-2 font-serif text-[11px] font-bold uppercase leading-snug tracking-[0.08em] sm:text-sm lg:text-[15px]">
                       {s.title}
                     </h3>
-                    <p className="mb-0 mt-1 line-clamp-2 text-xs leading-relaxed text-nav-left-fg/75">
+                    <p className="mb-0 mt-1 line-clamp-2 text-[13px] leading-relaxed text-nav-left-fg/85 max-sm:hidden [@media(max-height:700px)]:hidden">
                       {s.text}
                     </p>
                     <span className="mt-1.5 inline-block text-[10px] font-bold uppercase tracking-[0.18em] text-accent">
@@ -452,7 +452,7 @@ export default function HowWeDo() {
               {/* CTA — opacity animated by JS scroll timeline */}
               <div
                 ref={setBlock(4)}
-                className="flex flex-wrap items-center gap-3 will-change-transform"
+                className="flex shrink-0 flex-wrap items-center gap-3 will-change-transform"
                 style={{ opacity: 0 }}
               >
                 <a
@@ -468,7 +468,7 @@ export default function HowWeDo() {
                     className="absolute inset-y-0 -left-1/2 w-1/3 -skew-x-12 bg-white/40 transition-transform duration-700 group-hover/btn:translate-x-[420%]"
                   />
                 </a>
-                <span className="text-[10px] uppercase tracking-[0.15em] text-nav-left-fg/70 sm:text-[11px]">
+                <span className="hidden text-[10px] uppercase tracking-[0.15em] text-nav-left-fg/70 sm:inline sm:text-[11px]">
                   We&rsquo;d love to hear about your project.
                 </span>
               </div>
