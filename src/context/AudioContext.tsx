@@ -14,16 +14,20 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
   const [muted, setMutedState] = useState(false);
 
   useEffect(() => {
-    // Load muted state from localStorage on mount
-    const savedMuted = localStorage.getItem("videoMuted");
-    if (savedMuted !== null) {
-      setMutedState(savedMuted === "true");
+    // Load muted state from localStorage on mount (client-side only)
+    if (typeof window !== "undefined") {
+      const savedMuted = localStorage.getItem("videoMuted");
+      if (savedMuted !== null) {
+        setMutedState(savedMuted === "true");
+      }
     }
   }, []);
 
   const setMuted = (muted: boolean) => {
     setMutedState(muted);
-    localStorage.setItem("videoMuted", String(muted));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("videoMuted", String(muted));
+    }
   };
 
   const toggleMute = () => {
@@ -40,7 +44,12 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
 export function useAudio() {
   const context = useContext(AudioContext);
   if (context === undefined) {
-    throw new Error("useAudio must be used within an AudioProvider");
+    // Return default values for SSR/build time
+    return {
+      muted: false,
+      toggleMute: () => {},
+      setMuted: () => {},
+    };
   }
   return context;
 }

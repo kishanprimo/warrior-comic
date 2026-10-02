@@ -1,17 +1,22 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAudio } from "@/context/AudioContext";
 
 const MOTION_VIDEO = "/images/Imgs/warrior-comic-motion-logo.mp4";
 
 export default function GlobalVideo() {
+  const [mounted, setMounted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const { muted } = useAudio();
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
     const v = videoRef.current;
-    if (!v) return;
+    if (!v || !mounted) return;
 
     let unlocked = false;
 
@@ -57,13 +62,17 @@ export default function GlobalVideo() {
       v.removeEventListener("loadeddata", attemptUnmuted);
       cleanup();
     };
-  }, [muted]);
+  }, [muted, mounted]);
 
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
     v.muted = muted;
   }, [muted]);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <video
