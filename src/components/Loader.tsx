@@ -148,9 +148,9 @@ export default function Loader({ onComplete }: LoaderProps) {
 
         {/* LEFT-ALIGNED OUTLINED TYPOGRAPHY (BOTTOM-LEFT) */}
         <div className="relative z-10 flex flex-1 flex-col items-start justify-end pb-6 sm:pb-8">
-          <div className="overflow-hidden pb-1">
+          <div className="overflow-hidden py-1 pl-1">
             <h1
-              className="text-left text-[16vw] font-black uppercase leading-[0.85] tracking-tighter sm:text-[14vw]"
+              className="pr-[0.12em] text-left text-[16vw] font-black uppercase leading-[0.85] tracking-tighter sm:text-[14vw]"
               style={{
                 WebkitTextStroke: "1.5px var(--loader-b-stroke)",
                 color: "transparent",

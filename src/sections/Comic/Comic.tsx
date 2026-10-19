@@ -688,59 +688,45 @@ const showL = double && index > 0;
       ref={sectionRef}
       id="comics"
       aria-label="Warrior Comics flipbook"
-      className="relative isolate mt-16 h-[calc(100svh-64px)] w-full overflow-hidden [container-type:size] sm:mt-[76px] sm:h-[calc(100svh-76px)]"
-      style={{ background: "#05020a" }}
+      className="relative isolate mt-16 h-[calc(100svh-64px)] w-full overflow-hidden bg-[#05020a] [container-type:size] sm:mt-[76px] sm:h-[calc(100svh-76px)]"
     >
       {/* ---------- BACKGROUND WAR SCENES ---------- */}
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-     {WAR_SCENES.map((s, i) => (
-  <div
-    key={s.src}
-    className="absolute inset-0"
-    style={{
-      opacity: i === bgIndex ? 1 : 0,
-      transform: i === bgIndex ? "scale(1.08)" : "scale(1.14)",
-      transition: "opacity 1100ms ease, transform 1600ms cubic-bezier(0.22,1,0.36,1)",
-      willChange: "opacity, transform",
-    }}
-  >
-    {s.rot ? (
-      <div
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          width: "100cqh",
-          height: "100cqw",
-          transform: `translate(-50%,-50%) rotate(${s.rot}deg)`,
-        }}
-      >
-        <img
-          src={s.src}
-          alt=""
-          draggable={false}
-          style={{ width: "100%", height: "100%", maxWidth: "none", objectFit: "cover", display: "block" }}
-        />
-      </div>
-    ) : (
-      <img
-        src={s.src}
-        alt=""
-        draggable={false}
-        className="absolute inset-0 h-full w-full object-cover"
-      />
-    )}
-  </div>
-))}
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.8) 100%)" }} />
-        <div className="absolute inset-0" style={{ background: "radial-gradient(120% 80% at 50% 50%, transparent 40%, rgba(0,0,0,0.75) 100%)" }} />
-        <div
-          className="absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage: "repeating-linear-gradient(0deg, rgba(255,255,255,0.6) 0 1px, transparent 1px 3px)",
-            animation: "comic-scan 8s linear infinite",
-          }}
-        />
+        {WAR_SCENES.map((s, i) => (
+          <div
+            key={s.src}
+            className="absolute inset-0 will-change-[opacity,transform]"
+            style={{
+              opacity: i === bgIndex ? 1 : 0,
+              transform: i === bgIndex ? "scale(1.08)" : "scale(1.14)",
+              transition: "opacity 1100ms ease, transform 1600ms cubic-bezier(0.22,1,0.36,1)",
+            }}
+          >
+            {s.rot ? (
+              <div
+                className="absolute left-1/2 top-1/2 h-[100cqw] w-[100cqh]"
+                style={{ transform: `translate(-50%,-50%) rotate(${s.rot}deg)` }}
+              >
+                <img
+                  src={s.src}
+                  alt=""
+                  draggable={false}
+                  className="block h-full w-full max-w-none object-cover"
+                />
+              </div>
+            ) : (
+              <img
+                src={s.src}
+                alt=""
+                draggable={false}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            )}
+          </div>
+        ))}
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.35)_0%,rgba(0,0,0,0.55)_45%,rgba(0,0,0,0.8)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_50%,transparent_40%,rgba(0,0,0,0.75)_100%)]" />
+        <div className="absolute inset-0 animate-[comic-scan_8s_linear_infinite] opacity-[0.06] [background-image:repeating-linear-gradient(0deg,rgba(255,255,255,0.6)_0_1px,transparent_1px_3px)]" />
       </div>
 
       <style>{`
@@ -764,49 +750,74 @@ const showL = double && index > 0;
       >
         <div
           ref={bookRef}
-          className="absolute left-1/2 top-1/2"
-          style={{ width: 0, height: 0, perspective: 2200, transformOrigin: "0 0", willChange: "transform" }}
+          className="absolute left-1/2 top-1/2 h-0 w-0 [perspective:2200px] [transform-origin:0_0] [will-change:transform]"
         >
           {/* ground shadow */}
           <div
             ref={shadowRef}
             aria-hidden
-            className="pointer-events-none"
-            style={{
-              position: "absolute", left: 0, top: PH / 2 - 10, width: PW, height: 40,
-              background: "radial-gradient(ellipse at 50% 30%, rgba(0,0,0,0.75), transparent 70%)",
-              filter: "blur(10px)", zIndex: 0,
-            }}
+            className="pointer-events-none absolute left-0 top-[330px] z-0 h-10 w-[480px] blur-[10px] [background:radial-gradient(ellipse_at_50%_30%,rgba(0,0,0,0.75),transparent_70%)]"
           />
-          <div ref={edgeR} aria-hidden style={{ position: "absolute", left: PW, top: -PH / 2 + 3, height: PH - 6, width: 0, background: "repeating-linear-gradient(to right,#efe7d4 0 1px,#bfb59c 1px 2px)", boxShadow: "2px 0 6px rgba(0,0,0,0.4)", zIndex: 0 }} />
-          <div ref={edgeL} aria-hidden style={{ position: "absolute", left: -PW, top: -PH / 2 + 3, height: PH - 6, width: 0, background: "repeating-linear-gradient(to left,#efe7d4 0 1px,#bfb59c 1px 2px)", boxShadow: "-2px 0 6px rgba(0,0,0,0.4)", zIndex: 0 }} />
+          <div
+            ref={edgeR}
+            aria-hidden
+            className="absolute -top-[337px] left-[480px] z-0 h-[674px] w-0 [background:repeating-linear-gradient(to_right,#efe7d4_0_1px,#bfb59c_1px_2px)] shadow-[2px_0_6px_rgba(0,0,0,0.4)]"
+          />
+          <div
+            ref={edgeL}
+            aria-hidden
+            className="absolute -top-[337px] left-[-480px] z-0 h-[674px] w-0 [background:repeating-linear-gradient(to_left,#efe7d4_0_1px,#bfb59c_1px_2px)] shadow-[-2px_0_6px_rgba(0,0,0,0.4)]"
+          />
 
           {leaves.map((def, i) => (
-            <Leaf key={`${double ? "d" : "s"}-${i}`} index={i} total={L} def={def} curl={curl[i] ?? false} double={double} register={register} getP={() => cur.current[i]} />
+            <Leaf
+              key={`${double ? "d" : "s"}-${i}`}
+              index={i}
+              total={L}
+              def={def}
+              curl={curl[i] ?? false}
+              double={double}
+              register={register}
+              getP={() => cur.current[i]}
+            />
           ))}
 
           {/* spine crease */}
           <div
             ref={spineRef}
             aria-hidden
-            className="pointer-events-none"
-            style={{
-              position: "absolute", left: -16, top: -PH / 2, width: 32, height: PH, opacity: 0, zIndex: 140,
-              background: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.12) 30%, rgba(0,0,0,0.38) 50%, rgba(0,0,0,0.12) 70%, transparent 100%)",
-            }}
+            className="pointer-events-none absolute -top-[340px] left-[-16px] z-[140] h-[680px] w-8 opacity-0 [background:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.12)_30%,rgba(0,0,0,0.38)_50%,rgba(0,0,0,0.12)_70%,transparent_100%)]"
           />
 
-          <div ref={shadeR} aria-hidden className="pointer-events-none" style={{ position: "absolute", left: 0, top: -PH / 2, width: PW, height: PH, opacity: 0, zIndex: 150, background: "linear-gradient(to right, rgba(0,0,0,0.85), transparent 85%)" }} />
-          <div ref={shadeL} aria-hidden className="pointer-events-none" style={{ position: "absolute", left: -PW, top: -PH / 2, width: PW, height: PH, opacity: 0, zIndex: 150, background: "linear-gradient(to left, rgba(0,0,0,0.85), transparent 85%)" }} />
+          <div
+            ref={shadeR}
+            aria-hidden
+            className="pointer-events-none absolute -top-[340px] left-0 z-[150] h-[680px] w-[480px] opacity-0 [background:linear-gradient(to_right,rgba(0,0,0,0.85),transparent_85%)]"
+          />
+          <div
+            ref={shadeL}
+            aria-hidden
+            className="pointer-events-none absolute -top-[340px] left-[-480px] z-[150] h-[680px] w-[480px] opacity-0 [background:linear-gradient(to_left,rgba(0,0,0,0.85),transparent_85%)]"
+          />
 
-     {/* right page, bottom corner */}
-<div aria-hidden className="pointer-events-none" style={{ position: "absolute", left: 0, top: -PH / 2, width: PW, height: PH, zIndex: 160, opacity: showR ? 1 : 0 }}>
-  <Corner side="R" on={hint === "R"} />
-</div>
-{/* left page, bottom corner */}
-<div aria-hidden className="pointer-events-none" style={{ position: "absolute", left: -PW, top: -PH / 2, width: PW, height: PH, zIndex: 160, opacity: showL ? 1 : 0 }}>
-  <Corner side="L" on={hint === "L"} />
-</div>
+          {/* right page, bottom corner */}
+          <div
+            aria-hidden
+            className={`pointer-events-none absolute -top-[340px] left-0 z-[160] h-[680px] w-[480px] transition-opacity duration-300 ${
+              showR ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <Corner side="R" on={hint === "R"} />
+          </div>
+          {/* left page, bottom corner */}
+          <div
+            aria-hidden
+            className={`pointer-events-none absolute -top-[340px] left-[-480px] z-[160] h-[680px] w-[480px] transition-opacity duration-300 ${
+              showL ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <Corner side="L" on={hint === "L"} />
+          </div>
         </div>
       </div>
     </section>

@@ -276,7 +276,7 @@ export default function Blog() {
     return `${base} ${ringState.inside ? "opacity-100" : "opacity-0"}`;
   };
 
-  return (
+return (
     <section
       ref={sectionRef}
       id="blog"
@@ -289,8 +289,7 @@ export default function Blog() {
         onPointerUp={onPointerUp}
         onMouseEnter={() => (pausedRef.current = true)}
         onMouseLeave={() => (pausedRef.current = false)}
-        className="relative w-full overflow-hidden flex flex-col items-center px-6 pt-8 pb-20 md:px-10 md:pt-10 md:pb-24"
-        style={{ height: "clamp(520px, 80vh, 720px)" }}
+        className="relative w-full overflow-hidden flex flex-col items-center px-6 pt-8 pb-20 md:px-10 md:pt-10 md:pb-24 h-[clamp(520px,80vh,720px)]"
       >
         {/* Stars */}
         <div aria-hidden className="absolute -inset-6 pointer-events-none wc-stars wc-star-drift" />
@@ -298,11 +297,7 @@ export default function Blog() {
         {/* Pulsing glow */}
         <div
           aria-hidden
-          className="absolute left-1/2 top-[45%] w-[70vmin] h-[70vmin] rounded-full pointer-events-none wc-glow-pulse"
-          style={{
-            background:
-              "radial-gradient(circle, color-mix(in srgb, var(--accent) 22%, transparent) 0%, transparent 65%)",
-          }}
+          className="absolute left-1/2 top-[45%] w-[70vmin] h-[70vmin] rounded-full pointer-events-none wc-glow-pulse bg-[radial-gradient(circle,color-mix(in_srgb,var(--accent)_22%,transparent)_0%,transparent_65%)]"
         />
 
         {/* Spinning rings */}
@@ -318,25 +313,17 @@ export default function Blog() {
         {/* Vignette */}
         <div
           aria-hidden
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: "radial-gradient(circle, transparent 55%, var(--background) 100%)" }}
+          className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle,transparent_55%,var(--background)_100%)]"
         />
 
         {/* Perspective Floor */}
         <div
           aria-hidden
-          className="absolute bottom-0 w-full h-[40%] pointer-events-none"
-          style={{ perspective: "600px" }}
+          className="absolute bottom-0 w-full h-[40%] pointer-events-none [perspective:600px]"
         >
           <div
             ref={floorRef}
-            className="w-[200%] h-full -ml-[50%] origin-[50%_100%]"
-            style={{
-              transform: "rotateX(80deg)",
-              backgroundImage:
-                "linear-gradient(to right, color-mix(in srgb, var(--foreground) 10%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in srgb, var(--foreground) 10%, transparent) 1px, transparent 1px)",
-              backgroundSize: "60px 40px",
-            }}
+            className="w-[200%] h-full -ml-[50%] origin-[50%_100%] [transform:rotateX(80deg)] [background-image:linear-gradient(to_right,color-mix(in_srgb,var(--foreground)_10%,transparent)_1px,transparent_1px),linear-gradient(to_bottom,color-mix(in_srgb,var(--foreground)_10%,transparent)_1px,transparent_1px)] [background-size:60px_40px]"
           />
         </div>
 
@@ -349,15 +336,8 @@ export default function Blog() {
         </header>
 
         {/* 3D Wall */}
-        <div
-          className="relative flex-1 w-full flex items-center justify-center min-h-0"
-          style={{ perspective: "1200px" }}
-        >
-          <div
-            ref={wallRef}
-            className="absolute"
-            style={{ transformStyle: "preserve-3d" }}
-          >
+        <div className="relative flex-1 w-full flex items-center justify-center min-h-0 [perspective:1200px]">
+          <div ref={wallRef} className="absolute [transform-style:preserve-3d]">
             {POSTS.map((p, i) => (
               <article
                 key={p.title}
@@ -374,38 +354,24 @@ export default function Blog() {
                 }}
                 onMouseEnter={() => setHovered(i)}
                 onMouseLeave={() => setHovered(null)}
-                className="absolute top-1/2 left-1/2 cursor-pointer group"
-                style={{
-                  transformStyle: "preserve-3d",
-                  transition: "filter 0.3s ease",
-                  borderRadius: "12px",
-                  boxShadow: "0 18px 40px -10px rgba(0,0,0,0.45)",
-                  outline:
-                    hovered === i
-                      ? "2px solid color-mix(in srgb, var(--accent) 70%, transparent)"
-                      : "none",
-                  outlineOffset: "2px",
-                }}
+                className={`absolute top-1/2 left-1/2 cursor-pointer group [transform-style:preserve-3d] rounded-xl shadow-[0_18px_40px_-10px_rgba(0,0,0,0.45)] transition-[filter] duration-300 ease ${
+                  hovered === i
+                    ? "outline outline-2 outline-offset-2 outline-[color-mix(in_srgb,var(--accent)_70%,transparent)]"
+                    : "outline-none"
+                }`}
               >
                 {Array.from({ length: SLICES }, (_, k) => (
                   <span
                     key={k}
                     aria-hidden
-                    className="wb-slice absolute top-1/2 left-1/2 bg-no-repeat"
+                    className="wb-slice absolute top-1/2 left-1/2 bg-no-repeat [backface-visibility:hidden] rounded-lg"
                     style={{
+                      /* dynamic per-slice image — comes from data */
                       backgroundImage: `url("${p.img}")`,
-                      backfaceVisibility: "hidden",
-                      borderRadius: "8px",
                     }}
                   />
                 ))}
-                <div
-                  className="absolute inset-0 pointer-events-none z-[2] rounded-lg"
-                  style={{
-                    background:
-                      "linear-gradient(to top, color-mix(in srgb, var(--nav-overlay-bg) 92%, transparent) 0%, transparent 60%)",
-                  }}
-                />
+                <div className="absolute inset-0 pointer-events-none z-[2] rounded-lg bg-[linear-gradient(to_top,color-mix(in_srgb,var(--nav-overlay-bg)_92%,transparent)_0%,transparent_60%)]" />
                 <h3 className="wb-tag absolute bottom-5 left-1/2 z-[3] m-0 text-left font-medium leading-snug text-white pointer-events-none">
                   {p.title}
                 </h3>
@@ -414,18 +380,15 @@ export default function Blog() {
           </div>
         </div>
 
-
         {/* Cursor */}
         <div
           ref={ringRef}
           aria-hidden
-          className={`fixed top-0 left-0 border-2 rounded-full pointer-events-none z-[9999] transition-all duration-200 ease-out ${getRingStyles()}`}
-          style={{
-            boxShadow:
-              ringState.mode === "open"
-                ? "0 0 20px color-mix(in srgb, var(--accent) 50%, transparent)"
-                : "0 0 12px color-mix(in srgb, var(--foreground) 15%, transparent)",
-          }}
+          className={`fixed top-0 left-0 border-2 rounded-full pointer-events-none z-[9999] transition-all duration-200 ease-out ${getRingStyles()} ${
+            ringState.mode === "open"
+              ? "shadow-[0_0_20px_color-mix(in_srgb,var(--accent)_50%,transparent)]"
+              : "shadow-[0_0_12px_color-mix(in_srgb,var(--foreground)_15%,transparent)]"
+          }`}
         />
         <div
           ref={dotRef}
